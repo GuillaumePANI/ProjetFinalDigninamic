@@ -1,0 +1,72 @@
+﻿@model WebApi.Models.Bdd.Formulaire
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Formulaire</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.titre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.titre)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.description)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.description)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.dateCreation)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.dateCreation)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.dateValidation)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.dateValidation)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.dateCloturation)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.dateCloturation)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿@model WebApi.Models.Bdd.Composant
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Composant</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Formulaire.titre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Formulaire.titre)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Question.contenu)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Question.contenu)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TypeReponse.type)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TypeReponse.type)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

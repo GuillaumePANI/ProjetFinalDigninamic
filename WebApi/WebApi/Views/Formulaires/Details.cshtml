@@ -1,0 +1,94 @@
+﻿@model WebApi.Models.Bdd.Formulaire
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Formulaire</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.titre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.titre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.description)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.dateCreation)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.dateCreation)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.dateValidation)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.dateValidation)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.dateCloturation)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.dateCloturation)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th colspan="3">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var com in @Model.Composant)
+            {
+            <tr>
+                <td>@com.Question.contenu</td>
+
+                <td>
+                    @Html.ActionLink("Détails", "Details", "Composants", new { id = com.id }, null)
+                </td>
+                <td>
+                    @Html.ActionLink("Modifier", "Edit", "Composants",
+                   new WebApi.Models.Bdd.Composant { id = com.id}, null)
+                </td>
+                <td>
+                    @Html.ActionLink("Supprimer", "Delete", "Composants", new { id = com.id }, null)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+</html>
