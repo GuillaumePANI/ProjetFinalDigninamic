@@ -1,53 +1,39 @@
 ﻿@model IEnumerable<WebApi.Models.Bdd.Composant>
 
-@{
-    Layout = null;
+<p>
+    @Html.ActionLink("Ajouter un composant", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Formulaire.titre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Question.contenu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeReponse.type)
+        </th>
+        <th></th>
+    </tr>
+    
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Formulaire.titre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Question.contenu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeReponse.type)
+        </td>
+        <td>
+            @Html.ActionLink("Éditer", "Edit", new { id=item.id  }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id  }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.id })
+        </td>
+    </tr>
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Formulaire.titre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Question.contenu)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TypeReponse.type)
-            </th>
-            <th></th>
-        </tr>
     
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Formulaire.titre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Question.contenu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeReponse.type)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-    }
-    
-    </table>
-</body>
-</html>
+</table>

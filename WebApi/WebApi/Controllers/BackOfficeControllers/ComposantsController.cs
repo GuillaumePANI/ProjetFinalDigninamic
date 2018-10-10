@@ -37,12 +37,21 @@ namespace WebApi.Controllers.BackOfficeControllers
         }
 
         // GET: Composants/Create
-        public ActionResult Create()
+        public ActionResult Create(int? idFormulaire)
         {
             ViewBag.idFormulaire = new SelectList(db.Formulaire, "id", "titre");
             ViewBag.idQuestion = new SelectList(db.Question, "id", "contenu");
             ViewBag.idTypeReponse = new SelectList(db.TypeReponse, "id", "type");
-            return View();
+            if (idFormulaire == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Composant composant = new Composant { idFormulaire = (int)idFormulaire };
+            if (composant == null)
+            {
+                return HttpNotFound();
+            }
+            return View(composant);
         }
 
         // POST: Composants/Create
@@ -56,7 +65,7 @@ namespace WebApi.Controllers.BackOfficeControllers
             {
                 db.Composant.Add(composant);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details","Formulaires", new { id = composant.idFormulaire });
             }
 
             ViewBag.idFormulaire = new SelectList(db.Formulaire, "id", "titre", composant.idFormulaire);
