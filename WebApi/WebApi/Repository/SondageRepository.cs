@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using WebApi.Models;
 using WebApi.Models.Bdd;
 
 namespace WebApi.Repository
 {
     public class SondageRepository
     {
-        readonly SatisfactionSurveyEntities satisfactionSurveyEntities = new SatisfactionSurveyEntities();
+        readonly ApplicationDbContext satisfactionSurveyEntities = new ApplicationDbContext();
 
         public IEnumerable<Sondage> GetAllSondage()
         {

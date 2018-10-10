@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-
+using WebApi.Models;
 using WebApi.Models.Bdd;
 
 namespace WebApi.Repository
@@ -14,7 +14,7 @@ namespace WebApi.Repository
         //{
         //    satisfactionSurveyEntities = SatisfactionSurveyEntities;
         //}
-        readonly SatisfactionSurveyEntities satisfactionSurveyEntities = new SatisfactionSurveyEntities();
+        readonly ApplicationDbContext satisfactionSurveyEntities = new ApplicationDbContext();
 
         public IEnumerable<Formulaire> GetAllFormulaires()
         {

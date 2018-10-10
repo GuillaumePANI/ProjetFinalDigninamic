@@ -1,22 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Http.ModelBinding;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.OAuth;
 using WebApi.Models;
-using WebApi.Providers;
-using WebApi.Results;
-using System.Linq;
 
 namespace WebApi.Controllers
 {

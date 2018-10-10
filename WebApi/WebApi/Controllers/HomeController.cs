@@ -12,7 +12,6 @@ namespace WebApi.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-            SatisfactionSurveyEntities sse = new SatisfactionSurveyEntities();
 
             return View();
         }
