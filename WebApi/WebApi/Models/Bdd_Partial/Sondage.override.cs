@@ -14,7 +14,8 @@ namespace WebApi.Models.Bdd_Partial
     public class SondageMetaData
     {
         [Required]
-        public System.DateTime date { get; set; }
+        public System.DateTime date { get; set;}
+
 
     }
 }
