@@ -239,6 +239,7 @@
     <Compile Include="Controllers\ApiControllers\SondageApiController.cs" />
     <Compile Include="Controllers\BackOfficeControllers\ComposantsController.cs" />
     <Compile Include="Controllers\BackOfficeControllers\FormulairesController.cs" />
+    <Compile Include="Controllers\BackOfficeControllers\ReponsesController.cs" />
     <Compile Include="Controllers\BackOfficeControllers\SondagesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -434,6 +435,11 @@
     <Content Include="Views\Composants\Details.cshtml" />
     <Content Include="Views\Composants\Edit.cshtml" />
     <Content Include="Views\Composants\Index.cshtml" />
+    <Content Include="Views\Reponses\Create.cshtml" />
+    <Content Include="Views\Reponses\Delete.cshtml" />
+    <Content Include="Views\Reponses\Details.cshtml" />
+    <Content Include="Views\Reponses\Edit.cshtml" />
+    <Content Include="Views\Reponses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
