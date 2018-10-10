@@ -7,7 +7,7 @@ namespace WebApi.Repository
 {
     public class SondageRepository
     {
-        readonly ApplicationDbContext satisfactionSurveyEntities = new ApplicationDbContext();
+        readonly SatisfactionSurveyEntities satisfactionSurveyEntities = new SatisfactionSurveyEntities();
 
         public IEnumerable<Sondage> GetAllSondage()
         {

@@ -11,8 +11,6 @@ using WebApi.Repository;
 
 namespace WebApi.Controllers.ApiControllers
 {
-    [Route("api/FormulaireApi")]
-    [EnableCors("AllowSpecificOrigin")]
     public class FormulaireApiController : ApiController
     {
         public FormulaireRepository formulairectrl = new FormulaireRepository();

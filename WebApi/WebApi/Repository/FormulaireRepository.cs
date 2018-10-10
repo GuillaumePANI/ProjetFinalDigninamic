@@ -14,7 +14,7 @@ namespace WebApi.Repository
         //{
         //    satisfactionSurveyEntities = SatisfactionSurveyEntities;
         //}
-        readonly ApplicationDbContext satisfactionSurveyEntities = new ApplicationDbContext();
+        readonly SatisfactionSurveyEntities satisfactionSurveyEntities = new SatisfactionSurveyEntities();
 
         public IEnumerable<Formulaire> GetAllFormulaires()
         {
