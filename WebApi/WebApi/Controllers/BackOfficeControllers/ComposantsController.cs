@@ -7,17 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApi.Models.Bdd;
+using WebApi.Repository;
 
 namespace WebApi.Controllers.BackOfficeControllers
 {
     public class ComposantsController : Controller
     {
-        private SatisfactionSurveyEntities db = new SatisfactionSurveyEntities();
+        private ComposantRepository repo;
 
         // GET: Composants
         public ActionResult Index()
         {
-            var composant = db.Composant.Include(c => c.Formulaire).Include(c => c.Question).Include(c => c.TypeReponse);
+            var composant = repo.GetAllComposants();
             return View(composant.ToList());
         }
 
@@ -28,7 +29,7 @@ namespace WebApi.Controllers.BackOfficeControllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Composant composant = db.Composant.Find(id);
+            Composant composant = repo.GetComposant((int)id);
             if (composant == null)
             {
                 return HttpNotFound();
@@ -37,21 +38,9 @@ namespace WebApi.Controllers.BackOfficeControllers
         }
 
         // GET: Composants/Create
-        public ActionResult Create(int? idFormulaire)
+        public ActionResult Create()
         {
-            ViewBag.idFormulaire = new SelectList(db.Formulaire, "id", "titre");
-            ViewBag.idQuestion = new SelectList(db.Question, "id", "contenu");
-            ViewBag.idTypeReponse = new SelectList(db.TypeReponse, "id", "type");
-            if (idFormulaire == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Composant composant = new Composant { idFormulaire = (int)idFormulaire };
-            if (composant == null)
-            {
-                return HttpNotFound();
-            }
-            return View(composant);
+            return View();
         }
 
         // POST: Composants/Create
@@ -63,14 +52,9 @@ namespace WebApi.Controllers.BackOfficeControllers
         {
             if (ModelState.IsValid)
             {
-                db.Composant.Add(composant);
-                db.SaveChanges();
+                repo.AddComposant(composant);
                 return RedirectToAction("Details","Formulaires", new { id = composant.idFormulaire });
             }
-
-            ViewBag.idFormulaire = new SelectList(db.Formulaire, "id", "titre", composant.idFormulaire);
-            ViewBag.idQuestion = new SelectList(db.Question, "id", "contenu", composant.idQuestion);
-            ViewBag.idTypeReponse = new SelectList(db.TypeReponse, "id", "type", composant.idTypeReponse);
             return View(composant);
         }
 
@@ -81,14 +65,11 @@ namespace WebApi.Controllers.BackOfficeControllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Composant composant = db.Composant.Find(id);
+            Composant composant = repo.GetComposant((int)id);
             if (composant == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.idFormulaire = new SelectList(db.Formulaire, "id", "titre", composant.idFormulaire);
-            ViewBag.idQuestion = new SelectList(db.Question, "id", "contenu", composant.idQuestion);
-            ViewBag.idTypeReponse = new SelectList(db.TypeReponse, "id", "type", composant.idTypeReponse);
             return View(composant);
         }
 
@@ -101,13 +82,9 @@ namespace WebApi.Controllers.BackOfficeControllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(composant).State = EntityState.Modified;
-                db.SaveChanges();
+                repo.EditComposant(composant);
                 return RedirectToAction("Index");
             }
-            ViewBag.idFormulaire = new SelectList(db.Formulaire, "id", "titre", composant.idFormulaire);
-            ViewBag.idQuestion = new SelectList(db.Question, "id", "contenu", composant.idQuestion);
-            ViewBag.idTypeReponse = new SelectList(db.TypeReponse, "id", "type", composant.idTypeReponse);
             return View(composant);
         }
 
@@ -118,7 +95,7 @@ namespace WebApi.Controllers.BackOfficeControllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Composant composant = db.Composant.Find(id);
+            Composant composant = repo.GetComposant((int)id);
             if (composant == null)
             {
                 return HttpNotFound();
@@ -131,19 +108,18 @@ namespace WebApi.Controllers.BackOfficeControllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Composant composant = db.Composant.Find(id);
-            db.Composant.Remove(composant);
-            db.SaveChanges();
+            Composant composant = repo.GetComposant((int)id);
+            repo.DeleteFormulaire(composant.id);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

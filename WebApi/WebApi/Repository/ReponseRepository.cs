@@ -25,7 +25,7 @@ namespace WebApi.Repository
             return satisfactionSurveyEntities.Reponse.FirstOrDefault(Reponse => Reponse.id == id);
         }
 
-        public int AddFormulaire(Reponse reponse)
+        public int AddReponse(Reponse reponse)
         {
             satisfactionSurveyEntities.Reponse.Add(reponse);
             satisfactionSurveyEntities.SaveChanges();
@@ -46,7 +46,7 @@ namespace WebApi.Repository
             return reponse.id;
         }
 
-        public void DeleteFormulaire(int Id)
+        public void DeleteReponse(int Id)
         {
             satisfactionSurveyEntities.Reponse.Remove(GetReponse(Id));
             satisfactionSurveyEntities.SaveChanges();

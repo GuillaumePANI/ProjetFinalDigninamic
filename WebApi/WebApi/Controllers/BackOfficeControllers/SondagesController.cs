@@ -7,17 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApi.Models.Bdd;
+using WebApi.Repository;
 
 namespace WebApi.Controllers.BackOfficeControllers
 {
     public class SondagesController : Controller
     {
-        private SatisfactionSurveyEntities db = new SatisfactionSurveyEntities();
+        private SondageRepository repo;
 
         // GET: Sondages
         public ActionResult Index()
         {
-            var sondage = db.Sondage.Include(s => s.Formulaire).Include(s => s.Sonde);
+            var sondage = repo.GetAllSondage(); ;
             return View(sondage.ToList());
         }
 
@@ -28,7 +29,7 @@ namespace WebApi.Controllers.BackOfficeControllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sondage sondage = db.Sondage.Find(id);
+            Sondage sondage = repo.GetSondage((int)id);
             if (sondage == null)
             {
                 return HttpNotFound();
@@ -39,8 +40,6 @@ namespace WebApi.Controllers.BackOfficeControllers
         // GET: Sondages/Create
         public ActionResult Create()
         {
-            ViewBag.idFormulaire = new SelectList(db.Formulaire, "id", "titre");
-            ViewBag.idSonde = new SelectList(db.Sonde, "id", "localisation");
             return View();
         }
 
@@ -53,13 +52,10 @@ namespace WebApi.Controllers.BackOfficeControllers
         {
             if (ModelState.IsValid)
             {
-                db.Sondage.Add(sondage);
-                db.SaveChanges();
+                repo.AddSondage(sondage);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.idFormulaire = new SelectList(db.Formulaire, "id", "titre", sondage.idFormulaire);
-            ViewBag.idSonde = new SelectList(db.Sonde, "id", "localisation", sondage.idSonde);
             return View(sondage);
         }
 
@@ -70,33 +66,34 @@ namespace WebApi.Controllers.BackOfficeControllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sondage sondage = db.Sondage.Find(id);
+            Sondage sondage = repo.GetSondage((int)id);
             if (sondage == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.idFormulaire = new SelectList(db.Formulaire, "id", "titre", sondage.idFormulaire);
-            ViewBag.idSonde = new SelectList(db.Sonde, "id", "localisation", sondage.idSonde);
+           
             return View(sondage);
         }
+
+        //On est pas sensé modifier les sondages !!!!
 
         // POST: Sondages/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,date,idFormulaire,idSonde")] Sondage sondage)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(sondage).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.idFormulaire = new SelectList(db.Formulaire, "id", "titre", sondage.idFormulaire);
-            ViewBag.idSonde = new SelectList(db.Sonde, "id", "localisation", sondage.idSonde);
-            return View(sondage);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "id,date,idFormulaire,idSonde")] Sondage sondage)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(sondage).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.idFormulaire = new SelectList(db.Formulaire, "id", "titre", sondage.idFormulaire);
+        //    ViewBag.idSonde = new SelectList(db.Sonde, "id", "localisation", sondage.idSonde);
+        //    return View(sondage);
+        //}
 
         // GET: Sondages/Delete/5
         public ActionResult Delete(int? id)
@@ -105,7 +102,7 @@ namespace WebApi.Controllers.BackOfficeControllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sondage sondage = db.Sondage.Find(id);
+            Sondage sondage = repo.GetSondage((int)id);
             if (sondage == null)
             {
                 return HttpNotFound();
@@ -118,19 +115,18 @@ namespace WebApi.Controllers.BackOfficeControllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Sondage sondage = db.Sondage.Find(id);
-            db.Sondage.Remove(sondage);
-            db.SaveChanges();
+            Sondage sondage = repo.GetSondage((int)id);
+            repo.DeleteSondage(sondage.id);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

@@ -7,17 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApi.Models.Bdd;
+using WebApi.Repository;
 
 namespace WebApi.Controllers.BackOfficeControllers
 {
     public class ReponsesController : Controller
     {
-        private SatisfactionSurveyEntities db = new SatisfactionSurveyEntities();
+        private ReponseRepository repo;
 
         // GET: Reponses
         public ActionResult Index()
         {
-            var reponse = db.Reponse.Include(r => r.Question);
+            var reponse = repo.GetAllReponses();
             return View(reponse.ToList());
         }
 
@@ -28,7 +29,7 @@ namespace WebApi.Controllers.BackOfficeControllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Reponse reponse = db.Reponse.Find(id);
+            Reponse reponse = repo.GetReponse((int)id);
             if (reponse == null)
             {
                 return HttpNotFound();
@@ -36,10 +37,9 @@ namespace WebApi.Controllers.BackOfficeControllers
             return View(reponse);
         }
 
-        // GET: Reponses/Create
+        //GET: Reponses/Create
         public ActionResult Create()
         {
-            ViewBag.idQuestion = new SelectList(db.Question, "id", "contenu");
             return View();
         }
 
@@ -52,12 +52,11 @@ namespace WebApi.Controllers.BackOfficeControllers
         {
             if (ModelState.IsValid)
             {
-                db.Reponse.Add(reponse);
-                db.SaveChanges();
+                repo.AddReponse(reponse);
+                
                 return RedirectToAction("Index");
             }
 
-            ViewBag.idQuestion = new SelectList(db.Question, "id", "contenu", reponse.idQuestion);
             return View(reponse);
         }
 
@@ -68,12 +67,11 @@ namespace WebApi.Controllers.BackOfficeControllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Reponse reponse = db.Reponse.Find(id);
+            Reponse reponse = repo.GetReponse((int)id);
             if (reponse == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.idQuestion = new SelectList(db.Question, "id", "contenu", reponse.idQuestion);
             return View(reponse);
         }
 
@@ -86,11 +84,10 @@ namespace WebApi.Controllers.BackOfficeControllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(reponse).State = EntityState.Modified;
-                db.SaveChanges();
+                repo.EditReponse(reponse);
                 return RedirectToAction("Index");
             }
-            ViewBag.idQuestion = new SelectList(db.Question, "id", "contenu", reponse.idQuestion);
+            //ViewBag.idQuestion = new SelectList(db.Question, "id", "contenu", reponse.idQuestion);
             return View(reponse);
         }
 
@@ -101,7 +98,7 @@ namespace WebApi.Controllers.BackOfficeControllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Reponse reponse = db.Reponse.Find(id);
+            Reponse reponse = repo.GetReponse((int)id);
             if (reponse == null)
             {
                 return HttpNotFound();
@@ -114,19 +111,18 @@ namespace WebApi.Controllers.BackOfficeControllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Reponse reponse = db.Reponse.Find(id);
-            db.Reponse.Remove(reponse);
-            db.SaveChanges();
+            Reponse reponse = repo.GetReponse((int)id);
+            repo.DeleteReponse(reponse.id);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }
