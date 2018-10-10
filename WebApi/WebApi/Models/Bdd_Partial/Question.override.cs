@@ -16,6 +16,10 @@ namespace WebApi.Models.Bdd_Partial
 
     public class QuestionMetaData
     {
+        [Required]
+        [Display(Name = "Question")]
+        public string contenu { get; set; }
+
         [JsonIgnore]
         [IgnoreDataMember]
         public virtual ICollection<Composant> Composant { get; set; }

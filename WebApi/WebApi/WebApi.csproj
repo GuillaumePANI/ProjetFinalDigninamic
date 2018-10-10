@@ -304,7 +304,12 @@
     <Compile Include="Models\Bdd\TypeReponse.cs">
       <DependentUpon>SatisfactionSurvey.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Bdd_Partial\Formulaire.override.cs" />
     <Compile Include="Models\Bdd_Partial\Question.override.cs" />
+    <Compile Include="Models\Bdd_Partial\Reponse.override.cs" />
+    <Compile Include="Models\Bdd_Partial\Sondage.override.cs" />
+    <Compile Include="Models\Bdd_Partial\ThemeQuestion.override.cs" />
+    <Compile Include="Models\Bdd_Partial\TypeReponse.override.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
