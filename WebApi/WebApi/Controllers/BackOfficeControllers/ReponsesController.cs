@@ -13,7 +13,7 @@ namespace WebApi.Controllers.BackOfficeControllers
 {
     public class ReponsesController : Controller
     {
-        private ReponseRepository repo;
+        private ReponseRepository repo = new ReponseRepository();
 
         // GET: Reponses
         public ActionResult Index()

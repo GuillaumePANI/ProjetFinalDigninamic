@@ -13,7 +13,7 @@ namespace WebApi.Controllers.BackOfficeControllers
 {
     public class ComposantsController : Controller
     {
-        private ComposantRepository repo;
+        private ComposantRepository repo = new ComposantRepository();
 
         // GET: Composants
         public ActionResult Index()

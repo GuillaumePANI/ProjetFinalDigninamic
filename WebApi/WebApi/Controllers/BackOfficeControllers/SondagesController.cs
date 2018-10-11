@@ -13,7 +13,7 @@ namespace WebApi.Controllers.BackOfficeControllers
 {
     public class SondagesController : Controller
     {
-        private SondageRepository repo;
+        private SondageRepository repo = new SondageRepository();
 
         // GET: Sondages
         public ActionResult Index()
