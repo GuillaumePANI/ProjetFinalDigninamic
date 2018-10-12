@@ -14,25 +14,44 @@ namespace WebApi.Repository
         public IEnumerable<Statistique> GetStatistiqueByFormulaire(int idFormulaire)
         {
             var sondages = satisfactionSurveyEntities.Sondage.Where(f => f.idFormulaire == idFormulaire);
-            var sondes = from sonde in satisfactionSurveyEntities.Sonde
+
+            var sondesAges = from sonde in satisfactionSurveyEntities.Sonde
                          join sondage in sondages on sonde.id equals sondage.idSonde
                          where sonde.id == sondage.idSonde
                          group sonde by sonde.age into s
-                         select new { Age = s.Key, Nombre = s.Count() };
+                         select new { Age = s.Key, Taux = s.Count()*100/sondages.Count() };
+
+            var sondesSexes = from sonde in satisfactionSurveyEntities.Sonde
+                             join sondage in sondages on sonde.id equals sondage.idSonde
+                             where sonde.id == sondage.idSonde
+                             group sonde by sonde.sexe into s
+                             select new { Sexe = s.Key, Taux = s.Count()*100 / sondages.Count() };
+
+            var sondesLocalisations = from sonde in satisfactionSurveyEntities.Sonde
+                              join sondage in sondages on sonde.id equals sondage.idSonde
+                              where sonde.id == sondage.idSonde
+                              group sonde by sonde.localisation into s
+                              select new { Localisation = s.Key, Taux = s.Count() * 100 / sondages.Count() };
 
             List<Statistique> statistiques = new List<Statistique>();
 
             Statistique nbSondagesParFormulaire = new Statistique { Id = 1, Requete = "nombre de sondages par formulaire", IdFormulaire = idFormulaire };
             Statistique tauxReponseParQuestion = new Statistique { Id = 2, Requete = "taux des réponses pour une question", IdFormulaire = idFormulaire };
             Statistique agesSondes = new Statistique { Id = 3, Requete = "L'âge des sondés et leur taux", IdFormulaire = idFormulaire };
+            Statistique sexesSondes = new Statistique { Id = 3, Requete = "Le sexe des sondés et leur taux", IdFormulaire = idFormulaire };
+            Statistique localisationsSondes = new Statistique { Id = 3, Requete = "Le sexe des sondés et leur taux", IdFormulaire = idFormulaire };
 
             nbSondagesParFormulaire.Reponse = string.Format("{0}", sondages.Count());
-            tauxReponseParQuestion.Reponse = string.Format("{0}", "");
-            agesSondes.Reponse = string.Join(", ", sondes); 
+            tauxReponseParQuestion.Reponse = string.Join("{0}", "");
+            agesSondes.Reponse = string.Join(", ", sondesAges);
+            sexesSondes.Reponse = string.Join(", ", sondesSexes);
+            localisationsSondes.Reponse = string.Join(", ", sondesLocalisations);
 
             statistiques.Add(nbSondagesParFormulaire);
             statistiques.Add(tauxReponseParQuestion);
             statistiques.Add(agesSondes);
+            statistiques.Add(sexesSondes);
+            statistiques.Add(localisationsSondes);
 
             return statistiques;
         }
