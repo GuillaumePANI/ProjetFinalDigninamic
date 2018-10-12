@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 
 namespace WebApi.Models.Bdd
@@ -16,5 +18,9 @@ namespace WebApi.Models.Bdd
         [Required]
         public string contenu { get; set; }
 
+
+        [JsonIgnore]
+        [IgnoreDataMember]
+        public virtual ICollection<ChoixReponse> ChoixReponse { get; set; }
     }
 }

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 using WebApi.Models.Bdd;
 
@@ -37,7 +39,8 @@ namespace WebApi.Models.Bdd
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime dateCloturation { get; set; }
 
-      
+        [JsonIgnore]
+        [IgnoreDataMember]
         public virtual ICollection<Sondage> Sondage { get; set; }
       
         public virtual ICollection<Composant> Composant { get; set; }
