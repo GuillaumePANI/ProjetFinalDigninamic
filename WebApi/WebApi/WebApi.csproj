@@ -237,6 +237,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllers\FormulaireApiController.cs" />
     <Compile Include="Controllers\ApiControllers\SondageApiController.cs" />
+    <Compile Include="Controllers\ApiControllers\StatistiqueApiController.cs" />
     <Compile Include="Controllers\BackOfficeControllers\ComposantsController.cs" />
     <Compile Include="Controllers\BackOfficeControllers\FormulairesController.cs" />
     <Compile Include="Controllers\BackOfficeControllers\ReponsesController.cs" />
@@ -312,9 +313,11 @@
     <Compile Include="Models\Bdd_Partial\ThemeQuestion.override.cs" />
     <Compile Include="Models\Bdd_Partial\TypeReponse.override.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Statistique.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Repository\ComposantRepository.cs" />
+    <Compile Include="Repository\StatistiqueRepository.cs" />
     <Compile Include="Repository\FormulaireRepository.cs" />
     <Compile Include="Repository\QuestionRepository.cs" />
     <Compile Include="Repository\ReponseRepository.cs" />
