@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 using System.Web;
 using WebApi.Models.Bdd;
 
-namespace WebApi.Models.Bdd_Partial
+namespace WebApi.Models.Bdd
 {
     [MetadataType(typeof(QuestionMetaData))]
     public partial class Question

@@ -5,49 +5,154 @@
 <p>
     @Html.ActionLink("Ajouter un formulaire", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.titre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dateCreation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dateValidation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dateCloturation)
-        </th>
-        <th></th>
-    </tr>
-    
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.titre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dateCreation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dateValidation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dateCloturation)
-        </td>
-        <td>
-            @Html.ActionLink("Éditer", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Détails", "Details", new { id=item.id }) |
-            @Html.ActionLink("Supprimer", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
-    
-</table>
+<div>
+    <h4><b>Formulaires en cours d'élaboration</b></h4>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.titre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateCreation)
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.dateValidation)*@
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.dateCloturation)*@
+            </th>
+            @*<th></th>*@
+        </tr>
+
+        @foreach (var item in (List<WebApi.Models.Bdd.Formulaire>)ViewBag.formulaireToValidate)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.titre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.dateCreation)
+                </td>
+                <td>
+                    Boutton Valider
+                    @*@Html.DisplayFor(modelItem => item.dateValidation)*@
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.dateCloturation)
+                    </td>*@
+                <td>
+                    @Html.ActionLink("Éditer", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Détails", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Supprimer", "Delete", new { id = item.id })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <h4><b>Formulaires en cours d'évaluation</b></h4>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.titre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateCreation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateValidation)
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.dateCloturation)*@
+            </th>
+            @*<th></th>*@
+        </tr>
+
+        @foreach (var item in (List<WebApi.Models.Bdd.Formulaire>)ViewBag.formulaireToClose)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.titre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateCreation)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.dateValidation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateCloturation)
+                    Boutton Cloturer
+                </td>
+                <td>
+                    @*@Html.ActionLink("Éditer", "Edit", new { id = item.id }) |*@
+                    @Html.ActionLink("Détails", "Details", new { id = item.id })
+                    @*@Html.ActionLink("Supprimer", "Delete", new { id = item.id })*@
+                </td>
+            </tr>
+        }
+    </table>
+    <h4><b>Formulaires clos</b></h4>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.titre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateCreation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateValidation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateCloturation)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in (List<WebApi.Models.Bdd.Formulaire>)ViewBag.formulaireClosed)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.titre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateCreation)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.dateValidation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateCloturation)
+                  
+                </td>
+                <td>
+                    @*@Html.ActionLink("Éditer", "Edit", new { id = item.id }) |*@
+                    @Html.ActionLink("Détails", "Details", new { id = item.id })
+                    @*@Html.ActionLink("Supprimer", "Delete", new { id = item.id })*@
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

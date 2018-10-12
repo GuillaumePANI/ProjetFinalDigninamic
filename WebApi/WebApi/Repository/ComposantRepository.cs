@@ -31,11 +31,12 @@ namespace WebApi.Repository
 
         public int EditComposant(Composant composant) //Possibilité de passer seulement les propriétés au lieu d'un objets si nécessaire
         {
-            var composantToEdit = satisfactionSurveyEntities.Composant.FirstOrDefault(f => f.id == composant.id);
+         //   var composantToEdit = satisfactionSurveyEntities.Composant.FirstOrDefault(f => f.id == composant.id);
+            var composantToEdit = satisfactionSurveyEntities.Composant.Find(composant.id);
 
-            satisfactionSurveyEntities.Entry(composantToEdit).State = EntityState.Modified;
+            //satisfactionSurveyEntities.Entry(composantToEdit).State = EntityState.Modified;
 
-           
+
 
             composantToEdit.Question = composant.Question;
             composantToEdit.idTypeReponse = composant.idTypeReponse;

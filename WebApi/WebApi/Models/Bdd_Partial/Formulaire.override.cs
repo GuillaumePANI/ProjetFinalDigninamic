@@ -5,9 +5,9 @@ using System.Linq;
 using System.Web;
 using WebApi.Models.Bdd;
 
-namespace WebApi.Models.Bdd_Partial
+namespace WebApi.Models.Bdd
 {
-    [MetadataType(typeof(QuestionMetaData))]
+    [MetadataType(typeof(FormulaireMetaData))]
     public partial class Formulaire
     {
     }
@@ -24,15 +24,18 @@ namespace WebApi.Models.Bdd_Partial
 
         [Required]
         [Display(Name = "Date de création")]
-        public Nullable<System.DateTime> dateCreation { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime dateCreation { get; set; }
 
         [Required]
         [Display(Name = "Date de validation")]
-        public Nullable<System.DateTime> dateValidation { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime dateValidation { get; set; }
 
         [Required]
-        [Display(Name = "date de clôture")]
-        public Nullable<System.DateTime> dateCloturation { get; set; }
+        [Display(Name = "Date de clôture")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime dateCloturation { get; set; }
 
       
         public virtual ICollection<Sondage> Sondage { get; set; }

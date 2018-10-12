@@ -38,8 +38,27 @@ namespace WebApi.Controllers.BackOfficeControllers
         }
 
         // GET: Composants/Create
-        public ActionResult Create()
+        public ActionResult Create(int idFormulaire)
         {
+            //Permet d'afficher la liste de TypeReponse dans la vue
+            List<TypeReponse> typeReponses = new TypeReponseRepository().GetAllTypeReponse().ToList();
+            List<SelectListItem> items = new List<SelectListItem>();
+            foreach (var item in typeReponses)
+            {
+                items.Add(new SelectListItem { Text = item.type, Value = item.id.ToString() });
+            }
+
+            List<Question> questions = new QuestionRepository().GetAllQuestions().ToList();
+            List<SelectListItem> listeQuestion = new List<SelectListItem>();
+            foreach (var item in questions)
+            {
+                listeQuestion.Add(new SelectListItem { Text = item.contenu, Value = item.id.ToString() });
+            }
+
+
+            ViewBag.listeQuestion = listeQuestion;
+            ViewBag.typeReponses = items;
+            ViewBag.idFormulaire = idFormulaire;
             return View();
         }
 
@@ -53,7 +72,7 @@ namespace WebApi.Controllers.BackOfficeControllers
             if (ModelState.IsValid)
             {
                 repo.AddComposant(composant);
-                return RedirectToAction("Details","Formulaires", new { id = composant.idFormulaire });
+                return RedirectToAction("Details", "Formulaires", new { id = composant.idFormulaire });
             }
             return View(composant);
         }
@@ -70,6 +89,18 @@ namespace WebApi.Controllers.BackOfficeControllers
             {
                 return HttpNotFound();
             }
+
+            List<TypeReponse> typeReponses = new TypeReponseRepository().GetAllTypeReponse().ToList();
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            foreach (var item in typeReponses)
+            {
+                items.Add(new SelectListItem { Text = item.type, Value = item.id.ToString(), Selected = composant.idTypeReponse == item.id });
+            }
+
+            ViewBag.typeReponses = items;
+
+
             return View(composant);
         }
 
@@ -78,7 +109,7 @@ namespace WebApi.Controllers.BackOfficeControllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idFormulaire,idQuestion,idTypeReponse")] Composant composant)
+        public ActionResult Edit([Bind(Include = "id,idFormulaire,idQuestion,idTypeReponse")] Composant composant)
         {
             if (ModelState.IsValid)
             {

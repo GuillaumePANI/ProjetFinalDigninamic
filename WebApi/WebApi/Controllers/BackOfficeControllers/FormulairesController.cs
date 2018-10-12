@@ -18,7 +18,12 @@ namespace WebApi.Controllers.BackOfficeControllers
         // GET: Formulaires
         public ActionResult Index()
         {
-            return View(reposFormulaire.GetAllFormulaires().ToList());
+            List<Formulaire> listeformulaire = reposFormulaire.GetAllFormulaires().ToList();
+            ViewBag.formulaireToValidate = listeformulaire.Where(a => a.dateValidation == null).ToList();
+            ViewBag.formulaireToClose = listeformulaire.Where(a => (a.dateCloturation == null || a.dateCloturation > DateTime.Now )&& a.dateValidation != null).ToList();
+            ViewBag.formulaireClosed = listeformulaire.Where(a => a.dateCloturation < DateTime.Now).ToList();
+
+            return View();
         }
 
         // GET: Formulaires/Details/5
@@ -52,6 +57,7 @@ namespace WebApi.Controllers.BackOfficeControllers
         {
             if (ModelState.IsValid)
             {
+                formulaire.dateCreation = DateTime.Now;
                 reposFormulaire.AddFormulaire(formulaire);
                 return RedirectToAction("Index");
             }

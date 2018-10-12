@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace WebApi.Models.Bdd_Partial
+namespace WebApi.Models.Bdd
 {
     [MetadataType(typeof(SondageMetaData))]
     public partial class Sondage

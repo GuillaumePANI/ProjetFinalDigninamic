@@ -306,6 +306,7 @@
     <Compile Include="Models\Bdd\TypeReponse.cs">
       <DependentUpon>SatisfactionSurvey.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Bdd_Partial\Composant.override.cs" />
     <Compile Include="Models\Bdd_Partial\Formulaire.override.cs" />
     <Compile Include="Models\Bdd_Partial\Question.override.cs" />
     <Compile Include="Models\Bdd_Partial\Reponse.override.cs" />
@@ -322,6 +323,7 @@
     <Compile Include="Repository\QuestionRepository.cs" />
     <Compile Include="Repository\ReponseRepository.cs" />
     <Compile Include="Repository\SondageRepository.cs" />
+    <Compile Include="Repository\TypeReponseRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
