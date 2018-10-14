@@ -19,12 +19,12 @@
                 @Html.DisplayNameFor(model => model.dateCreation)
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.dateValidation)*@
+                @Html.DisplayNameFor(model => model.dateValidation)
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.dateCloturation)*@
+                @Html.DisplayNameFor(model => model.dateCloturation)
             </th>
-            @*<th></th>*@
+            <th></th>
         </tr>
 
         @foreach (var item in (List<WebApi.Models.Bdd.Formulaire>)ViewBag.formulaireToValidate)
@@ -41,16 +41,18 @@
                     @Html.DisplayFor(modelItem => item.dateCreation)
                 </td>
                 <td>
-                    Boutton Valider
-                    @*@Html.DisplayFor(modelItem => item.dateValidation)*@
+                   <input type="button" value="Valider" onclick='window.location = "@Url.Action("ValiderFormulaire", new { id = item.id })"' class="btn btn-default"/>
+                  @*  @Html.ActionLink("Valider", "ValiderFormulaire", new { id = item.id })*@
                 </td>
-                @*<td>
+                <td>
                         @Html.DisplayFor(modelItem => item.dateCloturation)
-                    </td>*@
+                    </td>
                 <td>
                     @Html.ActionLink("Éditer", "Edit", new { id = item.id }) |
                     @Html.ActionLink("Détails", "Details", new { id = item.id }) |
                     @Html.ActionLink("Supprimer", "Delete", new { id = item.id })
+                    <input type="button" value="Dupliquer" onclick='window.location = "@Url.Action("Duplicate", new { id = item.id })"' class="btn btn-default" />
+
                 </td>
             </tr>
         }
@@ -72,9 +74,9 @@
                 @Html.DisplayNameFor(model => model.dateValidation)
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.dateCloturation)*@
+                @Html.DisplayNameFor(model => model.dateCloturation)
             </th>
-            @*<th></th>*@
+            <th></th>
         </tr>
 
         @foreach (var item in (List<WebApi.Models.Bdd.Formulaire>)ViewBag.formulaireToClose)
@@ -95,12 +97,16 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.dateCloturation)
-                    Boutton Cloturer
+                   
                 </td>
                 <td>
+                    <input type="button" value="Clôturer" onclick='window.location = "@Url.Action("CloturerFormulaire", new { id = item.id })"' class="btn btn-default" />
+                    <input type="button" value="Dupliquer" onclick='window.location = "@Url.Action("Duplicate", new { id = item.id })"' class="btn btn-default" />
+
                     @*@Html.ActionLink("Éditer", "Edit", new { id = item.id }) |*@
                     @Html.ActionLink("Détails", "Details", new { id = item.id })
                     @*@Html.ActionLink("Supprimer", "Delete", new { id = item.id })*@
+
                 </td>
             </tr>
         }
@@ -147,6 +153,8 @@
                   
                 </td>
                 <td>
+                    <input type="button" value="Dupliquer" onclick='window.location = "@Url.Action("Duplicate", new { id = item.id })"' class="btn btn-default" />
+
                     @*@Html.ActionLink("Éditer", "Edit", new { id = item.id }) |*@
                     @Html.ActionLink("Détails", "Details", new { id = item.id })
                     @*@Html.ActionLink("Supprimer", "Delete", new { id = item.id })*@

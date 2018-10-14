@@ -45,8 +45,8 @@ namespace WebApi.Repository
 
             if (!string.IsNullOrEmpty(formulaire.titre))
                 formulaireToEdit.titre = formulaire.titre;
-
-            formulaireToEdit.Composant = formulaire.Composant;
+            if (formulaire.dateCloturation != null)
+                formulaireToEdit.dateCloturation = formulaire.dateCloturation;
 
             satisfactionSurveyEntities.SaveChanges();
 
@@ -62,6 +62,23 @@ namespace WebApi.Repository
         public void Dispose()
         {
             satisfactionSurveyEntities.Dispose();
+        }
+
+        public int ValidFormulaire(Formulaire form)
+        {
+            var formulaireToValid = GetFormulaire(form.id);
+
+            formulaireToValid.dateValidation = DateTime.Now;
+            satisfactionSurveyEntities.SaveChanges();
+            return formulaireToValid.id;
+        }
+        public int CloseFormulaire(Formulaire form)
+        {
+            var formulaireToClose = GetFormulaire(form.id);
+
+            formulaireToClose.dateCloturation = DateTime.Now;
+            satisfactionSurveyEntities.SaveChanges();
+            return formulaireToClose.id;
         }
     }
 }

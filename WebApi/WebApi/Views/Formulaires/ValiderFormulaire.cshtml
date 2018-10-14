@@ -1,0 +1,38 @@
+﻿@model WebApi.Models.Bdd.Formulaire
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <h3>Voulez Vous valider ce Formulaire et démarrer le sondage ?</h3>
+    <h4> @Html.DisplayFor(form => form.titre)</h4>
+
+    <p>@Html.DisplayFor(form => form.description)</p>
+    @Html.HiddenFor(form => form.id)
+    <table class="table table-hover">
+
+        @foreach (var items in Model.Composant)
+        {
+            <thead>  <tr><td><b>@items.Question.contenu</b></td></tr> </thead>
+
+            <tbody>
+                @foreach (var reponse in items.Question.Reponse)
+                {
+
+                    <tr><td>@reponse.contenu</td></tr>
+
+                }
+            </tbody>
+        }
+
+
+    </table>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Valider le formulaire" class="btn btn-default" />
+            <input type="submit" Value="Retour" formaction="@Url.Action("Index")" class="btn btn-default" />
+        </div>
+    </div>
+}
+

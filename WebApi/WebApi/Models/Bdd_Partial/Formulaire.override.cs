@@ -24,17 +24,17 @@ namespace WebApi.Models.Bdd
         [Display(Name = "Description")]
         public string description { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Date de création")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime dateCreation { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Date de validation")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime dateValidation { get; set; }
 
-        [Required]
+        
         [Display(Name = "Date de clôture")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime dateCloturation { get; set; }
