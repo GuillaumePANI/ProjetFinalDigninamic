@@ -85,7 +85,7 @@ namespace WebApi.Controllers.BackOfficeControllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "titre,description,dateCloturation")] Formulaire formulaire)
+        public ActionResult Edit([Bind(Include = "id,titre,description,dateCloturation")] Formulaire formulaire)
         {
             var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)

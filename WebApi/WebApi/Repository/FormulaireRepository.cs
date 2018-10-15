@@ -50,7 +50,7 @@ namespace WebApi.Repository
         {
             var formulaireToEdit = satisfactionSurveyEntities.Formulaire.FirstOrDefault(f => f.id == formulaire.id);
 
-            satisfactionSurveyEntities.Entry(formulaireToEdit).State = EntityState.Modified;
+            //satisfactionSurveyEntities.Entry(formulaireToEdit).State = EntityState.Modified;
 
             if (!string.IsNullOrEmpty(formulaire.description))
                 formulaireToEdit.description = formulaire.description;

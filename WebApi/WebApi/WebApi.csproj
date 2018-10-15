@@ -240,6 +240,7 @@
     <Compile Include="Controllers\ApiControllers\StatistiqueApiController.cs" />
     <Compile Include="Controllers\BackOfficeControllers\ComposantsController.cs" />
     <Compile Include="Controllers\BackOfficeControllers\FormulairesController.cs" />
+    <Compile Include="Controllers\BackOfficeControllers\QuestionsController.cs" />
     <Compile Include="Controllers\BackOfficeControllers\ReponsesController.cs" />
     <Compile Include="Controllers\BackOfficeControllers\SondagesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -451,6 +452,12 @@
     <Content Include="Views\Formulaires\ValiderFormulaire.cshtml" />
     <Content Include="Views\Formulaires\CloturerFormulaire.cshtml" />
     <Content Include="Views\Formulaires\Duplicate.cshtml" />
+    <Content Include="Views\Shared\_Reponse.cshtml" />
+    <Content Include="Views\Questions\Create.cshtml" />
+    <Content Include="Views\Questions\Delete.cshtml" />
+    <Content Include="Views\Questions\Details.cshtml" />
+    <Content Include="Views\Questions\Edit.cshtml" />
+    <Content Include="Views\Questions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

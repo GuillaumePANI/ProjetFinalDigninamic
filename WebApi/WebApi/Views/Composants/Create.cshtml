@@ -9,17 +9,18 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.idFormulaire, new { Value = ViewBag.idFormulaire })
+        @Html.HiddenFor(model => model.idQuestion, new { Value = ViewBag.questionid })
     
-        <div class="form-group">
-            @Html.LabelFor(model => model.idQuestion, "idQuestion", htmlAttributes: new { @class = "control-label col-md-2" })
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Question.contenu, "Intitulé de la Question", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.idQuestion, (List<SelectListItem>)ViewBag.listeQuestion, htmlAttributes: new { @class = "form-control" })
+                @Html.EditorFor(model => model.Question.contenu,"" )
                 @Html.ValidationMessageFor(model => model.idQuestion, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
     
         <div class="form-group">
-            @Html.LabelFor(model => model.idTypeReponse, "idTypeReponse", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.idTypeReponse, "Type de réponse attendu", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.idTypeReponse, (List<SelectListItem>)ViewBag.typeReponses, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.idTypeReponse, "", new { @class = "text-danger" })

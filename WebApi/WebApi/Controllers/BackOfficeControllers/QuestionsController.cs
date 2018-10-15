@@ -11,110 +11,110 @@ using WebApi.Repository;
 
 namespace WebApi.Controllers.BackOfficeControllers
 {
-    public class ReponsesController : Controller
+    public class QuestionsController : Controller
     {
-        private ReponseRepository repo = new ReponseRepository();
-        private ComposantRepository compoRepo = new ComposantRepository();
+        private QuestionRepository questionRepo = new QuestionRepository();
 
-        // GET: Reponses
+        // GET: Questions
         public ActionResult Index()
         {
-            var reponse = repo.GetAllReponses();
-            return View(reponse.ToList());
+            var question = questionRepo.GetAllQuestions();
+            return View(question.ToList());
         }
 
-        // GET: Reponses/Details/5
+        // GET: Questions/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Reponse reponse = repo.GetReponse((int)id);
-            if (reponse == null)
+            Question question = questionRepo.GetQuestion((int)id);
+            if (question == null)
             {
                 return HttpNotFound();
             }
-            return View(reponse);
+            return View(question);
         }
 
-        //GET: Reponses/Create
-        public ActionResult Create()
+        // GET: Questions/Create
+        public ActionResult Create(int idForm)
         {
+            ViewBag.idForm = idForm;
             return View();
         }
 
-        // POST: Reponses/Create
+        // POST: Questions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,contenu,commentaire,idQuestion")] Reponse reponse, int idComposant )
+        public ActionResult Create([Bind(Include = "id,contenu,idTheme")] Question question, int idForm)
         {
             if (ModelState.IsValid)
             {
-                repo.AddReponse(reponse);
-                return RedirectToAction("Details", "Composants", new {id =  idComposant});
+                questionRepo.AddQuestion(question);
+
+                
+                return RedirectToAction("Create", "Composants", new { questionid = question.id, idFormulaire = idForm });
             }
 
-            return View(reponse);
+            return View(question);
         }
 
-        // GET: Reponses/Edit/5
+        // GET: Questions/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Reponse reponse = repo.GetReponse((int)id);
-            if (reponse == null)
+            Question question = questionRepo.GetQuestion((int)id);
+            if (question == null)
             {
                 return HttpNotFound();
             }
-            return View(reponse);
+            return View(question);
         }
 
-        // POST: Reponses/Edit/5
+        // POST: Questions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,contenu,commentaire,idQuestion")] Reponse reponse)
+        public ActionResult Edit([Bind(Include = "id,contenu,idTheme")] Question question)
         {
             if (ModelState.IsValid)
             {
-                repo.EditReponse(reponse);
+                questionRepo.EditQuestion(question);
                 return RedirectToAction("Index");
             }
-            //ViewBag.idQuestion = new SelectList(db.Question, "id", "contenu", reponse.idQuestion);
-            return View(reponse);
+            return View(question);
         }
 
-        // GET: Reponses/Delete/5
-        public ActionResult Delete(int? id, int idCompo)
+        // GET: Questions/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Reponse reponse = repo.GetReponse((int)id);
-            if (reponse == null)
+            Question question = questionRepo.GetQuestion((int)id);
+            if (question == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.idCompo = idCompo;
-            return View(reponse);
+            return View(question);
         }
 
-        // POST: Reponses/Delete/5
+        // POST: Questions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id, int idCompo)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Reponse reponse = repo.GetReponse((int)id);
-            repo.DeleteReponse(reponse.id);
-            return RedirectToAction("Details", "Composants", new { id = idCompo });
+            Question question = questionRepo.GetQuestion((int)id);
+            questionRepo.DeleteQuestion(question.id);
+            return RedirectToAction("Index");
         }
 
         //protected override void Dispose(bool disposing)

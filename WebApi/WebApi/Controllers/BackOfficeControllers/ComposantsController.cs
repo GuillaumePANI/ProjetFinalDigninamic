@@ -14,6 +14,7 @@ namespace WebApi.Controllers.BackOfficeControllers
     public class ComposantsController : Controller
     {
         private ComposantRepository repo = new ComposantRepository();
+        private QuestionRepository repoQuestion = new QuestionRepository();
 
         // GET: Composants
         public ActionResult Index()
@@ -38,7 +39,7 @@ namespace WebApi.Controllers.BackOfficeControllers
         }
 
         // GET: Composants/Create
-        public ActionResult Create(int idFormulaire)
+        public ActionResult Create(int idFormulaire, int questionid)
         {
             //Permet d'afficher la liste de TypeReponse dans la vue
             List<TypeReponse> typeReponses = new TypeReponseRepository().GetAllTypeReponse().ToList();
@@ -48,15 +49,15 @@ namespace WebApi.Controllers.BackOfficeControllers
                 items.Add(new SelectListItem { Text = item.type, Value = item.id.ToString() });
             }
 
-            List<Question> questions = new QuestionRepository().GetAllQuestions().ToList();
-            List<SelectListItem> listeQuestion = new List<SelectListItem>();
-            foreach (var item in questions)
-            {
-                listeQuestion.Add(new SelectListItem { Text = item.contenu, Value = item.id.ToString() });
-            }
+            //List<Question> questions = new QuestionRepository().GetAllQuestions().ToList();
+            //List<SelectListItem> listeQuestion = new List<SelectListItem>();
+            //foreach (var item in questions)
+            //{
+            //    listeQuestion.Add(new SelectListItem { Text = item.contenu, Value = item.id.ToString() });
+            //}
 
-
-            ViewBag.listeQuestion = listeQuestion;
+            ViewBag.questionid = questionid;
+            //ViewBag.listeQuestion = listeQuestion;
             ViewBag.typeReponses = items;
             ViewBag.idFormulaire = idFormulaire;
             return View();
@@ -71,6 +72,7 @@ namespace WebApi.Controllers.BackOfficeControllers
         {
             if (ModelState.IsValid)
             {
+              composant.idQuestion = 
                 repo.AddComposant(composant);
                 return RedirectToAction("Details", "Formulaires", new { id = composant.idFormulaire });
             }
@@ -114,7 +116,7 @@ namespace WebApi.Controllers.BackOfficeControllers
             if (ModelState.IsValid)
             {
                 repo.EditComposant(composant);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Composants", new {id = composant.id });
             }
             return View(composant);
         }
@@ -140,8 +142,9 @@ namespace WebApi.Controllers.BackOfficeControllers
         public ActionResult DeleteConfirmed(int id)
         {
             Composant composant = repo.GetComposant((int)id);
+            var idForm = composant.idFormulaire;
             repo.DeleteFormulaire(composant.id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Formulaires", new { id = idForm });
         }
 
         //protected override void Dispose(bool disposing)

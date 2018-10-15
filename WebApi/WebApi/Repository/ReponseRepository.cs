@@ -48,8 +48,11 @@ namespace WebApi.Repository
 
         public void DeleteReponse(int Id)
         {
+            if(!satisfactionSurveyEntities.ChoixReponse.Any(a => a.idReponse == Id))
+            {
             satisfactionSurveyEntities.Reponse.Remove(GetReponse(Id));
             satisfactionSurveyEntities.SaveChanges();
+            }
         }
 
 
