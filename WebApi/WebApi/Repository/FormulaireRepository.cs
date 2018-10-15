@@ -22,6 +22,18 @@ namespace WebApi.Repository
             return formulaires;
         }
 
+        public IEnumerable<Formulaire> GetAllFormulairesValidesPasClotures()
+        {
+            IEnumerable<Formulaire> formulaires = satisfactionSurveyEntities.Formulaire.Where(p=>p.dateValidation != null && (p.dateCloturation == null || p.dateCloturation > DateTime.Now));
+            return formulaires;
+        }
+
+        public IEnumerable<Formulaire> GetAllFormulairesClotures()
+        {
+            IEnumerable<Formulaire> formulaires = satisfactionSurveyEntities.Formulaire.Where(p => p.dateCloturation != null && p.dateCloturation >= DateTime.Now);
+            return formulaires;
+        }
+
         public Formulaire GetFormulaire(int id)
         {
             return satisfactionSurveyEntities.Formulaire.FirstOrDefault(formulaire => formulaire.id == id);

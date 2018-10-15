@@ -19,7 +19,7 @@ namespace WebApi.Controllers.ApiControllers
         [HttpGet]
         public IHttpActionResult GetFormulaires()
         {
-            return Ok(formulairectrl.GetAllFormulaires());
+            return Ok(formulairectrl.GetAllFormulairesValidesPasClotures());
         }
 
         // get api/formulairesapi/id
