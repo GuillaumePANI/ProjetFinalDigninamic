@@ -25,8 +25,8 @@ namespace WebApi.Models.Bdd
         public string commentaire { get; set; }
         public Nullable<int> idQuestion { get; set; }
     
-        public virtual Question Question { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChoixReponse> ChoixReponse { get; set; }
+        public virtual Question Question { get; set; }
     }
 }

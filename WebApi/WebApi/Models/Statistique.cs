@@ -9,7 +9,7 @@ namespace WebApi.Models
     {
         public int Id { get; set; }
         public string Requete { get; set; }
-        public string Reponse { get; set; }
+        public Object Reponse { get; set; }
         public int IdFormulaire { get; set; }
 
     }

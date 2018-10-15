@@ -11,6 +11,7 @@ using WebApi.Repository;
 
 namespace WebApi.Controllers.BackOfficeControllers
 {
+    
     public class ComposantsController : Controller
     {
         private ComposantRepository repo = new ComposantRepository();
@@ -54,7 +55,6 @@ namespace WebApi.Controllers.BackOfficeControllers
             {
                 listeQuestion.Add(new SelectListItem { Text = item.contenu, Value = item.id.ToString() });
             }
-
 
             ViewBag.listeQuestion = listeQuestion;
             ViewBag.typeReponses = items;
@@ -100,7 +100,6 @@ namespace WebApi.Controllers.BackOfficeControllers
 
             ViewBag.typeReponses = items;
 
-
             return View(composant);
         }
 
@@ -144,13 +143,5 @@ namespace WebApi.Controllers.BackOfficeControllers
             return RedirectToAction("Index");
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
     }
 }
