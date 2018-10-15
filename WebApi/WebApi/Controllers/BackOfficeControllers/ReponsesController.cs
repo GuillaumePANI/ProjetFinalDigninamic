@@ -117,13 +117,5 @@ namespace WebApi.Controllers.BackOfficeControllers
             return RedirectToAction("Details", "Composants", new { id = idCompo });
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
     }
 }

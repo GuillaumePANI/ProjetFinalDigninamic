@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using WebApi.Models.Bdd;
 using WebApi.Repository;
 
 namespace WebApi.Controllers.ApiControllers
 {
+    //[EnableCors(origins: "*", headers: "*", methods: "*")]
     public class SondageApiController : ApiController
     {
         public SondageRepository sondagectrl = new SondageRepository();
@@ -27,7 +29,6 @@ namespace WebApi.Controllers.ApiControllers
             return Ok(form);
         }
 
-
         // Envoi des réponses dans la table ChoixRéponse
         [HttpPost]
         public IHttpActionResult PostSondage(Sondage sondage)
@@ -35,11 +36,5 @@ namespace WebApi.Controllers.ApiControllers
 
             return Ok(sondagectrl.AddSondage(sondage));
         }
-
-
-
-
-
-
     }
 }

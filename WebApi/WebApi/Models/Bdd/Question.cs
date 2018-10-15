@@ -17,18 +17,18 @@ namespace WebApi.Models.Bdd
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Question()
         {
-            this.Reponse = new HashSet<Reponse>();
             this.Composant = new HashSet<Composant>();
+            this.Reponse = new HashSet<Reponse>();
         }
     
         public int id { get; set; }
         public string contenu { get; set; }
         public Nullable<int> idTheme { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Composant> Composant { get; set; }
         public virtual ThemeQuestion ThemeQuestion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reponse> Reponse { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Composant> Composant { get; set; }
     }
 }

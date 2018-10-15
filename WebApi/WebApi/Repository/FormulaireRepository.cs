@@ -9,28 +9,23 @@ namespace WebApi.Repository
 {
     public class FormulaireRepository
     {
-        //public readonly SatisfactionSurveyEntities SatisfactionSurveyEntities;
-        //public FormulaireRepository(SatisfactionSurveyEntities satisfactionSurveyEntities)
-        //{
-        //    satisfactionSurveyEntities = SatisfactionSurveyEntities;
-        //}
         readonly SatisfactionSurveyEntities satisfactionSurveyEntities = new SatisfactionSurveyEntities();
 
         public IEnumerable<Formulaire> GetAllFormulaires()
         {
-            IEnumerable<Formulaire> formulaires = satisfactionSurveyEntities.Formulaire;
+            IEnumerable<Formulaire> formulaires = satisfactionSurveyEntities.Formulaire.ToList();
             return formulaires;
         }
 
         public IEnumerable<Formulaire> GetAllFormulairesValidesPasClotures()
         {
-            IEnumerable<Formulaire> formulaires = satisfactionSurveyEntities.Formulaire.Where(p=>p.dateValidation != null && (p.dateCloturation == null || p.dateCloturation > DateTime.Now));
+            IEnumerable<Formulaire> formulaires = satisfactionSurveyEntities.Formulaire.Where(p=> p.dateValidation.HasValue && (!p.dateCloturation.HasValue || p.dateCloturation.Value > DateTime.Now)).ToList();
             return formulaires;
         }
 
         public IEnumerable<Formulaire> GetAllFormulairesClotures()
         {
-            IEnumerable<Formulaire> formulaires = satisfactionSurveyEntities.Formulaire.Where(p => p.dateCloturation != null && p.dateCloturation >= DateTime.Now);
+            IEnumerable<Formulaire> formulaires = satisfactionSurveyEntities.Formulaire.Where(p => p.dateCloturation.HasValue && p.dateCloturation.Value <= DateTime.Now).ToList();
             return formulaires;
         }
 

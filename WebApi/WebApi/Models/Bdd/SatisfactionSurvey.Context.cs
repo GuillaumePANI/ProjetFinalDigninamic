@@ -12,6 +12,8 @@ namespace WebApi.Models.Bdd
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class SatisfactionSurveyEntities : DbContext
     {
@@ -25,19 +27,27 @@ namespace WebApi.Models.Bdd
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<ChoixReponse> ChoixReponse { get; set; }
+        public virtual DbSet<Composant> Composant { get; set; }
         public virtual DbSet<Formulaire> Formulaire { get; set; }
         public virtual DbSet<Question> Question { get; set; }
         public virtual DbSet<Reponse> Reponse { get; set; }
         public virtual DbSet<Sondage> Sondage { get; set; }
         public virtual DbSet<Sonde> Sonde { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<ThemeQuestion> ThemeQuestion { get; set; }
         public virtual DbSet<TypeReponse> TypeReponse { get; set; }
-        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<Composant> Composant { get; set; }
+    
+        public virtual ObjectResult<tauxReponseParQuestion_Result> tauxReponseParQuestion(Nullable<int> idFormulaire)
+        {
+            var idFormulaireParameter = idFormulaire.HasValue ?
+                new ObjectParameter("idFormulaire", idFormulaire) :
+                new ObjectParameter("idFormulaire", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<tauxReponseParQuestion_Result>("tauxReponseParQuestion", idFormulaireParameter);
+        }
     }
 }

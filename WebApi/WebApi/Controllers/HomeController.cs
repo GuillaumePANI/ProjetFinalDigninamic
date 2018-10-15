@@ -11,8 +11,6 @@ namespace WebApi.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
-
             return RedirectToAction("Index", "Formulaires");
         }
     }

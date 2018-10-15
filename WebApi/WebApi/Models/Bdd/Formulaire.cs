@@ -17,8 +17,8 @@ namespace WebApi.Models.Bdd
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Formulaire()
         {
-            this.Sondage = new HashSet<Sondage>();
             this.Composant = new HashSet<Composant>();
+            this.Sondage = new HashSet<Sondage>();
         }
     
         public int id { get; set; }
@@ -29,8 +29,8 @@ namespace WebApi.Models.Bdd
         public Nullable<System.DateTime> dateCloturation { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sondage> Sondage { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Composant> Composant { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sondage> Sondage { get; set; }
     }
 }

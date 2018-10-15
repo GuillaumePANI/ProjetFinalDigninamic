@@ -10,14 +10,11 @@
 namespace WebApi.Models.Bdd
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class tauxReponseParQuestion_Result
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public Nullable<int> idQuestion { get; set; }
+        public int idReponse { get; set; }
+        public Nullable<decimal> tauxReponse { get; set; }
     }
 }
