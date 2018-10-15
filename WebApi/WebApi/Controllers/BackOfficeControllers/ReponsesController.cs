@@ -11,6 +11,7 @@ using WebApi.Repository;
 
 namespace WebApi.Controllers.BackOfficeControllers
 {
+    [Authorize]
     public class ReponsesController : Controller
     {
         private ReponseRepository repo = new ReponseRepository();

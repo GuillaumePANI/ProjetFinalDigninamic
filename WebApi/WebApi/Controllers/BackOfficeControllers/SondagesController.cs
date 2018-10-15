@@ -11,6 +11,7 @@ using WebApi.Repository;
 
 namespace WebApi.Controllers.BackOfficeControllers
 {
+    [Authorize]
     public class SondagesController : Controller
     {
         private SondageRepository repo = new SondageRepository();

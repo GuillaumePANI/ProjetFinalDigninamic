@@ -11,6 +11,7 @@ using WebApi.Repository;
 
 namespace WebApi.Controllers.BackOfficeControllers
 {
+    [Authorize]
     public class FormulairesController : Controller
     {
         private FormulaireRepository reposFormulaire = new FormulaireRepository();
