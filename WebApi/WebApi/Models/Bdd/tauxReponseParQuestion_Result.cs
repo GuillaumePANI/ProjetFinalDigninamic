@@ -14,7 +14,9 @@ namespace WebApi.Models.Bdd
     public partial class tauxReponseParQuestion_Result
     {
         public Nullable<int> idQuestion { get; set; }
+        public string question { get; set; }
         public int idReponse { get; set; }
+        public string reponse { get; set; }
         public Nullable<decimal> tauxReponse { get; set; }
     }
 }

@@ -337,25 +337,8 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\Bdd\SatisfactionSurvey.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SatisfactionSurvey.edmx</DependentUpon>
-      <LastGenOutput>SatisfactionSurvey.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Bdd\SatisfactionSurvey.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SatisfactionSurvey.edmx</DependentUpon>
-      <LastGenOutput>SatisfactionSurvey.cs</LastGenOutput>
-    </Content>
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EntityDeploy Include="Models\Bdd\SatisfactionSurvey.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SatisfactionSurvey.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Bdd\SatisfactionSurvey.edmx.diagram">
-      <DependentUpon>SatisfactionSurvey.edmx</DependentUpon>
     </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -384,10 +367,27 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <EntityDeploy Include="Models\Bdd\SatisfactionSurvey.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SatisfactionSurvey.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Bdd\SatisfactionSurvey.edmx.diagram">
+      <DependentUpon>SatisfactionSurvey.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\SatisfactionSurveyApi - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\SatisfactionSurveyApi - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Models\Bdd\SatisfactionSurvey.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SatisfactionSurvey.edmx</DependentUpon>
+      <LastGenOutput>SatisfactionSurvey.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Bdd\SatisfactionSurvey.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SatisfactionSurvey.edmx</DependentUpon>
+      <LastGenOutput>SatisfactionSurvey.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

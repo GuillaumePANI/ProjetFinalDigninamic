@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SatisfactionSurveyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SatisfactionSurveyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -368,8 +368,7 @@
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SatisfactionSurveyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -720,12 +719,14 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <FunctionImport Name="tauxReponseParQuestion" ReturnType="Collection(SatisfactionSurveyModel.tauxReponseParQuestion_Result)">
-            <Parameter Name="idFormulaire" Mode="In" Type="Int32" />
+          <Parameter Name="idFormulaire" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="tauxReponseParQuestion_Result">
           <Property Type="Int32" Name="idQuestion" Nullable="true" />
+          <Property Type="String" Name="question" Nullable="false" />
           <Property Type="Int32" Name="idReponse" Nullable="false" />
+          <Property Type="String" Name="reponse" Nullable="false" />
           <Property Type="Decimal" Name="tauxReponse" Nullable="true" Precision="26" Scale="12" />
         </ComplexType>
       </Schema>
@@ -877,7 +878,9 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="SatisfactionSurveyModel.tauxReponseParQuestion_Result">
                 <ScalarProperty Name="idQuestion" ColumnName="idQuestion" />
+                <ScalarProperty Name="question" ColumnName="question" />
                 <ScalarProperty Name="idReponse" ColumnName="idReponse" />
+                <ScalarProperty Name="reponse" ColumnName="reponse" />
                 <ScalarProperty Name="tauxReponse" ColumnName="tauxReponse" />
               </ComplexTypeMapping>
             </ResultMapping>

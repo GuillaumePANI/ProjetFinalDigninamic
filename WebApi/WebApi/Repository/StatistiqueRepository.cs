@@ -53,7 +53,6 @@ namespace WebApi.Repository
             return statistiques;
         }
 
-
         public IEnumerable<Statistique> GetStatistiqueByFormulaire(int idFormulaire)
         {
             var sondages = satisfactionSurveyEntities.Sondage.Where(f => f.idFormulaire == idFormulaire);
@@ -84,13 +83,28 @@ namespace WebApi.Repository
             Statistique nbSondagesParFormulaire = new Statistique { Id = 2, Requete = "Nombre de sondages par formulaire", IdFormulaire = idFormulaire };
             Statistique agesSondes = new Statistique { Id = 3, Requete = "L'âge des sondés et leur taux", IdFormulaire = idFormulaire };
             Statistique sexesSondes = new Statistique { Id = 4, Requete = "Le sexe des sondés et leur taux", IdFormulaire = idFormulaire };
-            Statistique localisationsSondes = new Statistique { Id = 5, Requete = "Le sexe des sondés et leur taux", IdFormulaire = idFormulaire };
-            
+            Statistique localisationsSondes = new Statistique { Id = 5, Requete = "La localisation des sondés et leur taux", IdFormulaire = idFormulaire };
+
+            var buffer = tauxChoixReponses[0];
+            var reponses = new List<Object>();
+            var questions = new List<Object>();
+            foreach (var rep in tauxChoixReponses)
+            {
+                if (rep.idQuestion != buffer.idQuestion)
+                {
+                    questions.Add( new { Question = buffer.question , Reponses = reponses });
+                    reponses = new List<Object> {};
+                }
+                buffer = rep;
+                reponses.Add(new { Reponse = buffer.reponse, Taux = buffer.tauxReponse });
+            }
+            questions.Add(new { Question = buffer.question, Reponses = reponses });
+
+            tauxReponseParQuestion.Reponse = questions;
             nbSondagesParFormulaire.Reponse = sondages.Count();
             agesSondes.Reponse = sondesAges;
             sexesSondes.Reponse = sondesSexes;
             localisationsSondes.Reponse = sondesLocalisations;
-            tauxReponseParQuestion.Reponse = tauxChoixReponses;
 
             statistiques.Add(tauxReponseParQuestion);
             statistiques.Add(nbSondagesParFormulaire);
