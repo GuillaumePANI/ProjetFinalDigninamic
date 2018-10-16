@@ -19,7 +19,7 @@ namespace WebApi.Controllers.BackOfficeControllers
         // GET: Satisistiques
         public ActionResult Index()
         {
-            List<Formulaire> formulairesClos = formRepo.GetAllFormulaires().Where(f => f.dateCloturation < DateTime.Now).ToList();
+            List<Formulaire> formulairesClos = formRepo.GetAllFormulaires().Where(a => a.dateCloturation < DateTime.Now).ToList();
 
             return View(formulairesClos);
         }

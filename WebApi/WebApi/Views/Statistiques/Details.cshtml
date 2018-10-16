@@ -1,52 +1,37 @@
-﻿@model IEnumerable<WebApi.Models.Statistique>
+﻿@model WebApi.Models.Statistique
 
-<h4><b>Formulaires clos</b></h4>
+<h3>@Html.DisplayFor(model => model.TitreFormulaire)</h3>
+
 <table class="table">
-    @*<tr>
-        <th>
-            @Html.DisplayNameFor(model => model.titre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dateCreation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dateValidation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dateCloturation)
-        </th>
-        <th></th>
-    </tr>*@
-
-    @foreach (var item in Model)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Requete)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Reponse)
-        </td>
-        @*  <td>
-            @Html.DisplayFor(modelItem => item.)
-        </td>
-        <td>
-
-            @Html.DisplayFor(modelItem => item.dateValidation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dateCloturation)
-
-        </td>
-        <td>
-            @Html.ActionLink("Éditer", "Edit", new { id = item.id }) |
-            @Html.ActionLink("Statistiques", "Details", new { id = item.id })
-            @Html.ActionLink("Supprimer", "Delete", new { id = item.id })
-        </td>*@
-    </tr>
-    }
+    <thead>
+        <tr>
+            <td>
+                <b>Statistiques Globales</b>
+            </td>
+        </tr>
+        <tr></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.NbSondes) Personne(s) a/ont répondu à ce questionnaire
+            </td>
+        </tr>
+        <tr>
+            <td><b>Age</b></td>
+        </tr>
+        @foreach(var item in Model.TauxAge)
+        {
+        <tr>
+            <td>
+                @Html.Display(item.Age.ToString())
+            </td>
+            <td>
+                @Html.Display(item.Taux .ToString())
+            </td>
+        </tr>
+        }
+    </tbody>
+  
 </table>
 
