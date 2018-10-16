@@ -143,16 +143,21 @@
         @foreach (var item in Model.TauxChoixReponse)
         {
         <tr>
-            <td><center><b>@item.Contenu</b></center></td>
+            <td><b>@item.Contenu</b></td>
             <td></td>
         </tr>
 
             foreach (var reponse in item.Reponses)
             {
-                <tr>
-                    <td>@reponse.Contenu</td>
-                    <td>@Convert.ToDouble(reponse.Taux) %</td>
-                </tr>
+        <tr>
+            <td width="30%"> &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;@reponse.Contenu</td>
+            <td width=" =70%">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:@reponse.Taux.ToString().Replace(",", ".")%">@Convert.ToDouble(reponse.Taux)%</div>
+            </div>
+            </td>
+           
+        </tr>
             }
         }
 

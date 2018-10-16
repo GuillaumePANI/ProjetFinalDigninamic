@@ -76,7 +76,7 @@
         @foreach (var com in @Model.Composant)
         {
             <tr>
-                <td>@com.Question.contenu</td>
+                <td><b>@com.Question.contenu</b></td>
 
                 <td>
                     @if (Model.dateValidation == null)
@@ -98,6 +98,20 @@
                     }
                 </td>
             </tr>
+            foreach(var rep in com.Question.Reponse)
+            {
+
+            <tr>
+                <td>
+                    &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+                    @rep.contenu
+
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            }
         }
     </tbody>
 </table>

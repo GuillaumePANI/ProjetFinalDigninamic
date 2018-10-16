@@ -16,6 +16,9 @@ namespace WebApi.Controllers.BackOfficeControllers
     {
         private ComposantRepository repo = new ComposantRepository();
         private QuestionRepository repoQuestion = new QuestionRepository();
+        private TypeReponseRepository repoType = new TypeReponseRepository();
+        private FormulaireRepository repoForm = new FormulaireRepository();
+
 
         // GET: Composants
         public ActionResult Index()
@@ -73,7 +76,7 @@ namespace WebApi.Controllers.BackOfficeControllers
         {
             if (ModelState.IsValid)
             {
-              composant.idQuestion = 
+              
                 repo.AddComposant(composant);
                 return RedirectToAction("Details", "Formulaires", new { id = composant.idFormulaire });
             }
@@ -112,14 +115,19 @@ namespace WebApi.Controllers.BackOfficeControllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,idFormulaire,idQuestion,idTypeReponse")] Composant composant)
+        public ActionResult Edit( Composant composant)
         {
-            if (ModelState.IsValid)
-            {
+            var model = ModelState.Values.SelectMany(a => a.Errors);
+            composant.TypeReponse = repoType.GettypeReponse(composant.idTypeReponse);
+            composant.Question.id = composant.idQuestion;
+            composant.Formulaire = repoForm.GetFormulaire(composant.idFormulaire);
+            //if (ModelState.IsValid)
+            //{
+                repoQuestion.EditQuestion(composant.Question);
                 repo.EditComposant(composant);
                 return RedirectToAction("Details", "Composants", new {id = composant.id });
-            }
-            return View(composant);
+            //}
+            //return View(composant);
         }
 
         // GET: Composants/Delete/5
