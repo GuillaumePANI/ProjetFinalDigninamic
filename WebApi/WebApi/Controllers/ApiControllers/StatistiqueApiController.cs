@@ -22,7 +22,7 @@ namespace WebApi.Controllers.ApiControllers
         }
 
         // get api/StatistiqueApi/id
-        [ResponseType(typeof(List<Statistique>))]
+        [ResponseType(typeof(Statistique))]
         public IHttpActionResult GetStatistiques(int id)
         {
             var form = reposStat.GetStatistiqueByFormulaire(id);
