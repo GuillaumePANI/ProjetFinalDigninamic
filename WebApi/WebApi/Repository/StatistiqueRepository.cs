@@ -15,15 +15,17 @@ namespace WebApi.Repository
         {
             List<Statistique> statistiques = new List<Statistique>();
 
-            var formulaires = from form in satisfactionSurveyEntities.Formulaire
-                              where form.dateCloturation.HasValue && form.dateCloturation.Value <= DateTime.Now
-                              select form;
+            var formulaires = (from form in satisfactionSurveyEntities.Formulaire
+                               where form.dateCloturation.HasValue && form.dateCloturation.Value <= DateTime.Now
+                               select form).ToList();
 
             foreach (var formulaire in formulaires)
             {
-                Statistique statistique = GetStatistiqueByFormulaire(formulaire.id);
-                statistique.TitreFormulaire = formulaire.titre;
-                statistiques.Add(statistique);
+                if (formulaire.id > 0)
+                {
+                    Statistique statistique = GetStatistiqueByFormulaire(formulaire.id);
+                    statistiques.Add(statistique);
+                }
             }
 
             return statistiques;
@@ -33,7 +35,35 @@ namespace WebApi.Repository
         {
             var sondages = satisfactionSurveyEntities.Sondage.Where(f => f.idFormulaire == idFormulaire);
 
-            var tauxChoixReponses = satisfactionSurveyEntities.tauxReponseParQuestion(idFormulaire).ToList();
+            var questions = new List<StatQuestion>();
+            try
+            {
+                using (var tauxChoixReponses = satisfactionSurveyEntities.tauxReponseParQuestion(idFormulaire))
+                {
+                    var listChoix = tauxChoixReponses.ToList();
+                    if (listChoix.Count > 0)
+                    {
+                        var buffer = listChoix[0];
+                        var reponses = new List<StatReponse>();
+
+                        foreach (var rep in listChoix)
+                        {
+                            if (rep.idQuestion != buffer.idQuestion)
+                            {
+                                questions.Add(new StatQuestion { Contenu = buffer.question, Reponses = reponses });
+                                reponses = new List<StatReponse> { };
+                            }
+                            buffer = rep;
+                            reponses.Add(new StatReponse { Contenu = buffer.reponse, Taux = buffer.tauxReponse });
+                        }
+                        questions.Add(new StatQuestion { Contenu = buffer.question, Reponses = reponses });
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
 
             var sondesAges = from sonde in satisfactionSurveyEntities.Sonde
                              join sondage in sondages on sonde.id equals sondage.idSonde
@@ -53,26 +83,12 @@ namespace WebApi.Repository
                                       group sonde by sonde.localisation into s
                                       select new RequeteLocalisation { Localisation = s.Key, Taux = s.Count() * 100 / sondages.Count() };
 
-            var buffer = tauxChoixReponses[0];
-            var reponses = new List<StatReponse>();
-            var questions = new List<StatQuestion>();
-            foreach (var rep in tauxChoixReponses)
+            Statistique statistique = new Statistique
             {
-                if (rep.idQuestion != buffer.idQuestion)
-                {
-                    questions.Add(new StatQuestion { Contenu = buffer.question, Reponses = reponses });
-                    reponses = new List<StatReponse> { };
-                }
-                buffer = rep;
-                reponses.Add(new StatReponse { Contenu = buffer.reponse, Taux = buffer.tauxReponse });
-            }
-            questions.Add(new StatQuestion { Contenu = buffer.question, Reponses = reponses });
-
-
-            Statistique statistique = new Statistique {
+                TitreFormulaire = satisfactionSurveyEntities.Formulaire.Find(idFormulaire).titre,
                 TauxChoixReponse = questions,
                 NbSondes = sondages.Count(),
-                TauxAge  = sondesAges.ToList(),
+                TauxAge = sondesAges.ToList(),
                 TauxSexe = sondesSexes.ToList(),
                 TauxLocalisation = sondesLocalisations.ToList()
             };
