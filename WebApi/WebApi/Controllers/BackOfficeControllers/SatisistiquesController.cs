@@ -10,6 +10,7 @@ using WebApi.Repository;
 
 namespace WebApi.Controllers.BackOfficeControllers
 {
+    [Authorize(Roles = "Admin")]
     public class StatistiquesController : Controller
     {
         private readonly FormulaireRepository formRepo = new FormulaireRepository();
@@ -30,7 +31,7 @@ namespace WebApi.Controllers.BackOfficeControllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            List<Statistique> statsFormulaire = statRepo.GetStatistiqueByFormulaire((int)id).ToList();
+            Statistique statsFormulaire = statRepo.GetStatistiqueByFormulaire((int)id);
             if (statsFormulaire == null)
             {
                 return HttpNotFound();

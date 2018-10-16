@@ -36,33 +36,27 @@ namespace WebApi.Repository
             var sondages = satisfactionSurveyEntities.Sondage.Where(f => f.idFormulaire == idFormulaire);
 
             var questions = new List<StatQuestion>();
-            try
-            {
-                using (var tauxChoixReponses = satisfactionSurveyEntities.tauxReponseParQuestion(idFormulaire))
-                {
-                    var listChoix = tauxChoixReponses.ToList();
-                    if (listChoix.Count > 0)
-                    {
-                        var buffer = listChoix[0];
-                        var reponses = new List<StatReponse>();
 
-                        foreach (var rep in listChoix)
-                        {
-                            if (rep.idQuestion != buffer.idQuestion)
-                            {
-                                questions.Add(new StatQuestion { Contenu = buffer.question, Reponses = reponses });
-                                reponses = new List<StatReponse> { };
-                            }
-                            buffer = rep;
-                            reponses.Add(new StatReponse { Contenu = buffer.reponse, Taux = buffer.tauxReponse });
-                        }
-                        questions.Add(new StatQuestion { Contenu = buffer.question, Reponses = reponses });
-                    }
-                }
-            }
-            catch (Exception e)
+            using (var tauxChoixReponses = satisfactionSurveyEntities.tauxReponseParQuestion(idFormulaire))
             {
-                throw e;
+                var listChoix = tauxChoixReponses.ToList();
+                if (listChoix.Count > 0)
+                {
+                    var buffer = listChoix[0];
+                    var reponses = new List<StatReponse>();
+
+                    foreach (var rep in listChoix)
+                    {
+                        if (rep.idQuestion != buffer.idQuestion)
+                        {
+                            questions.Add(new StatQuestion { Contenu = buffer.question, Reponses = reponses });
+                            reponses = new List<StatReponse> { };
+                        }
+                        buffer = rep;
+                        reponses.Add(new StatReponse { Contenu = buffer.reponse, Taux = buffer.tauxReponse });
+                    }
+                    questions.Add(new StatQuestion { Contenu = buffer.question, Reponses = reponses });
+                }
             }
 
             var sondesAges = from sonde in satisfactionSurveyEntities.Sonde

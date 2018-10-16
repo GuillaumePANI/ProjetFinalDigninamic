@@ -11,6 +11,7 @@ using WebApi.Repository;
 
 namespace WebApi.Controllers.BackOfficeControllers
 {
+    [Authorize(Roles = "Admin")]
     public class QuestionsController : Controller
     {
         private QuestionRepository questionRepo = new QuestionRepository();
