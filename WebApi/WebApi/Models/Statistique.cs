@@ -48,8 +48,8 @@ namespace WebApi.Models
 
     public class IdTitreDateFormulaire
     {
-        public int IdFormulaire { get; set; }
-        public string TitreFormulaire { get; set; }
-        public DateTime? DateCloture { get; set; }
+        public int Id { get; set; }
+        public string Titre{ get; set; }
+        public DateTime? DateCloturation { get; set; }
     }
 }

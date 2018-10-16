@@ -25,9 +25,9 @@ namespace WebApi.Repository
                 {
                     IdTitreDateFormulaire statistique = new IdTitreDateFormulaire
                     {
-                        IdFormulaire = formulaire.id,
-                        TitreFormulaire = formulaire.titre,
-                        DateCloture = formulaire.dateCloturation
+                        Id = formulaire.id,
+                        Titre = formulaire.titre,
+                        DateCloturation = formulaire.dateCloturation
                     };
                     statistiques.Add(statistique);
                 }
