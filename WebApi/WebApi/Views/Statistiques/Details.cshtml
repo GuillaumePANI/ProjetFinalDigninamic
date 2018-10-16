@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebApi.Models.Statistique>
+
+<h4><b>Formulaires clos</b></h4>
+<table class="table">
+    @*<tr>
+        <th>
+            @Html.DisplayNameFor(model => model.titre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateCreation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateValidation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateCloturation)
+        </th>
+        <th></th>
+    </tr>*@
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Requete)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reponse)
+        </td>
+        @*  <td>
+            @Html.DisplayFor(modelItem => item.)
+        </td>
+        <td>
+
+            @Html.DisplayFor(modelItem => item.dateValidation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateCloturation)
+
+        </td>
+        <td>
+            @Html.ActionLink("Éditer", "Edit", new { id = item.id }) |
+            @Html.ActionLink("Statistiques", "Details", new { id = item.id })
+            @Html.ActionLink("Supprimer", "Delete", new { id = item.id })
+        </td>*@
+    </tr>
+    }
+</table>
+

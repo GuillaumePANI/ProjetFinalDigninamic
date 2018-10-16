@@ -243,6 +243,7 @@
     <Compile Include="Controllers\BackOfficeControllers\FormulairesController.cs" />
     <Compile Include="Controllers\BackOfficeControllers\QuestionsController.cs" />
     <Compile Include="Controllers\BackOfficeControllers\ReponsesController.cs" />
+    <Compile Include="Controllers\BackOfficeControllers\SatisistiquesController.cs" />
     <Compile Include="Controllers\BackOfficeControllers\SondagesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -469,6 +470,8 @@
     <Content Include="Views\Questions\Details.cshtml" />
     <Content Include="Views\Questions\Edit.cshtml" />
     <Content Include="Views\Questions\Index.cshtml" />
+    <Content Include="Views\Statistiques\Index.cshtml" />
+    <Content Include="Views\Statistiques\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
