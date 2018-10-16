@@ -11,7 +11,7 @@ namespace WebApi.Repository
 
         public IEnumerable<Sondage> GetAllSondage()
         {
-            IEnumerable<Sondage> sondages = satisfactionSurveyEntities.Sondage;
+            IEnumerable<Sondage> sondages = satisfactionSurveyEntities.Sondage.ToList();
             return sondages;
         }
 

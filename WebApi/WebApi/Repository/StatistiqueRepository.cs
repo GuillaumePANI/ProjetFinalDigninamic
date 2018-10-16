@@ -11,9 +11,9 @@ namespace WebApi.Repository
     {
         readonly SatisfactionSurveyEntities satisfactionSurveyEntities = new SatisfactionSurveyEntities();
 
-        public IEnumerable<Statistique> GetAllStatistiques()
+        public IEnumerable<IdTitreDateFormulaire> GetAllStatistiques()
         {
-            List<Statistique> statistiques = new List<Statistique>();
+            List<IdTitreDateFormulaire> statistiques = new List<IdTitreDateFormulaire>();
 
             var formulaires = (from form in satisfactionSurveyEntities.Formulaire
                                where form.dateCloturation.HasValue && form.dateCloturation.Value <= DateTime.Now
@@ -23,7 +23,12 @@ namespace WebApi.Repository
             {
                 if (formulaire.id > 0)
                 {
-                    Statistique statistique = GetStatistiqueByFormulaire(formulaire.id);
+                    IdTitreDateFormulaire statistique = new IdTitreDateFormulaire
+                    {
+                        IdFormulaire = formulaire.id,
+                        TitreFormulaire = formulaire.titre,
+                        DateCloture = formulaire.dateCloturation
+                    };
                     statistiques.Add(statistique);
                 }
             }
@@ -63,20 +68,20 @@ namespace WebApi.Repository
                              join sondage in sondages on sonde.id equals sondage.idSonde
                              where sonde.id == sondage.idSonde
                              group sonde by sonde.age into s
-                             select new RequeteAge { Age = s.Key, Taux = s.Count() * 100 / sondages.Count() };
+                             select new RequeteAge { Age = s.Key, Taux = Math.Round(s.Count() * 100.0 / sondages.Count(),2) };
 
             var sondesSexes = from sonde in satisfactionSurveyEntities.Sonde
                               join sondage in sondages on sonde.id equals sondage.idSonde
                               where sonde.id == sondage.idSonde
                               group sonde by sonde.sexe into s
-                              select new RequeteSexe { Sexe = s.Key, Taux = s.Count() * 100 / sondages.Count() };
+                              select new RequeteSexe { Sexe = s.Key, Taux = Math.Round(s.Count() * 100.0 / sondages.Count(),2)  };
 
             var sondesLocalisations = from sonde in satisfactionSurveyEntities.Sonde
                                       join sondage in sondages on sonde.id equals sondage.idSonde
                                       where sonde.id == sondage.idSonde
                                       group sonde by sonde.localisation into s
-                                      select new RequeteLocalisation { Localisation = s.Key, Taux = s.Count() * 100 / sondages.Count() };
-
+                                      select new RequeteLocalisation { Localisation = s.Key, Taux = Math.Round(s.Count() * 100.0 / sondages.Count(),2) };
+            
             Statistique statistique = new Statistique
             {
                 TitreFormulaire = satisfactionSurveyEntities.Formulaire.Find(idFormulaire).titre,

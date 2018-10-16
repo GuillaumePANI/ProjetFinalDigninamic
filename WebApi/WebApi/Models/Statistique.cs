@@ -7,6 +7,7 @@ namespace WebApi.Models
 {
     public class Statistique
     {
+        public int IdFormulaire { get; set; }
         public string TitreFormulaire { get; set; }
         public List<StatQuestion> TauxChoixReponse { get; set; }
         public int NbSondes { get; set; }
@@ -30,18 +31,25 @@ namespace WebApi.Models
     public class RequeteAge
     {
         public int? Age { get; set; }
-        public float Taux { get; set; }
+        public double Taux { get; set; }
     }
 
     public class RequeteSexe
     {
         public bool? Sexe { get; set; }
-        public float Taux { get; set; }
+        public double Taux { get; set; }
     }
 
     public class RequeteLocalisation
     {
         public string Localisation { get; set; }
-        public float Taux { get; set; }
+        public double Taux { get; set; }
+    }
+
+    public class IdTitreDateFormulaire
+    {
+        public int IdFormulaire { get; set; }
+        public string TitreFormulaire { get; set; }
+        public DateTime? DateCloture { get; set; }
     }
 }
