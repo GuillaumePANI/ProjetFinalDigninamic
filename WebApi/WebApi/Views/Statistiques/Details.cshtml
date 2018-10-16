@@ -1,12 +1,12 @@
 ﻿@model WebApi.Models.Statistique
 
-<h3>@Html.DisplayFor(model => model.TitreFormulaire)</h3>
+<h4>@Html.DisplayFor(model => model.TitreFormulaire)</h4>
 
 <table class="table">
     <thead>
         <tr>
             <td>
-                <b>Statistiques Globales</b>
+                <h4><b>Statistiques Globales</b></h4>
             </td>
         </tr>
         <tr></tr>
@@ -16,22 +16,153 @@
             <td>
                 @Html.DisplayFor(model => model.NbSondes) Personne(s) a/ont répondu à ce questionnaire
             </td>
+            <td></td>
         </tr>
         <tr>
             <td><b>Age</b></td>
+            <td></td>
         </tr>
-        @foreach(var item in Model.TauxAge)
+        @foreach (var item in Model.TauxAge)
         {
+            if (item.Age != null)
+            {
+                <tr>
+                    <td>
+                        @item.Age ans
+                    </td>
+                    <td>
+                        @item.Taux %
+                    </td>
+                </tr>
+
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        Age non renseigné
+                    </td>
+                    <td>
+                        @item.Taux %
+                    </td>
+                </tr>}
+        }
+        <tr>
+            <td><b>Sexe</b></td>
+            <td></td>
+        </tr>
+        @foreach (var item in Model.TauxSexe)
+        {
+
+            if (item.Sexe == false)
+            {
+                <tr>
+                    <td>
+                        Homme
+                    </td>
+                    <td>
+                        @item.Taux %
+                    </td>
+                </tr>
+            }
+            if (item.Sexe == true)
+            {
+                <tr>
+                    <td>
+                        Femme
+                    </td>
+                    <td>
+                        @item.Taux %
+                    </td>
+                </tr>
+            }
+            if (item.Sexe == null)
+            {
+                <tr>
+                    <td>
+                        Non renseigné
+                    </td>
+                    <td>
+                        @item.Taux %
+                    </td>
+                </tr>
+            }
+        }
+
+        <tr>
+            <td><b>Localisation</b></td>
+            <td></td>
+        </tr>
+        @{
+            float total = 0;
+
+
+        }
+
+        @foreach (var item in Model.TauxLocalisation)
+        {
+            if (string.IsNullOrEmpty(item.Localisation))
+            {
+                total += item.Taux;
+
+
+            }
+            if (!string.IsNullOrWhiteSpace(item.Localisation))
+            {
+                <tr>
+                    <td>
+                        @item.Localisation
+                    </td>
+                    <td>
+                        @item.Taux %
+                    </td>
+                </tr>
+            }
+        }
         <tr>
             <td>
-                @Html.Display(item.Age.ToString())
+                Non renseigné
             </td>
             <td>
-                @Html.Display(item.Taux .ToString())
+                @total %
             </td>
         </tr>
-        }
     </tbody>
-  
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+                <h4><b>Réponses aux questionnaire</b></h4>
+            </td>
+        <td></td>
+        </tr>
+        </thead>
+    <tbody>
+        @foreach (var item in Model.TauxChoixReponse)
+        {
+        <tr>
+            <td><center><b>@item.Contenu</b></center></td>
+            <td></td>
+        </tr>
+
+            foreach (var reponse in item.Reponses)
+            {
+                <tr>
+                    <td>@reponse.Contenu</td>
+                    <td>@Convert.ToDouble(reponse.Taux) %</td>
+                </tr>
+            }
+        }
+
+
+
+
+
+
+    </tbody>
+
+
 </table>
 
