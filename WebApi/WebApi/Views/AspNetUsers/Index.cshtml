@@ -5,9 +5,6 @@
         <th>
             Identifiant utilisateur
         </th>
-        <th>
-            Nombre d'accès refusé
-        </th>
         <th colspan="2">
             Rôle
         </th>
@@ -18,9 +15,6 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AccessFailedCount)
         </td>
         <td>
             @if (item.AspNetRoles.Count() > 0)
