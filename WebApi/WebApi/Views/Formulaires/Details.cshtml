@@ -47,12 +47,12 @@
     </dl>
 </div>
 <p>
-    @if (Model.dateValidation == null)
+    @*@if (Model.dateValidation == null)
     {
-        @Html.ActionLink("Éditer", "Edit", new { id = Model.id }) 
-                }
+        @Html.ActionLink("Éditer", "Edit", new { id = Model.id })
+    }
 
-   | @Html.ActionLink("Retour à la liste des formulaires", "Index")
+    |*@ @Html.ActionLink("Retour à la liste des formulaires", "Index")
 </p>
 
 <h4>Questions</h4>
@@ -70,7 +70,7 @@
             {
                 <th colspan="3">Actions</th>
             }
-            </tr>
+        </tr>
     </thead>
     <tbody>
         @foreach (var com in @Model.Composant)
@@ -81,7 +81,7 @@
                 <td>
                     @if (Model.dateValidation == null)
                     {
-                        @Html.ActionLink("Détails", "Details", "Composants", new { id = com.id }, null)
+                        @Html.ActionLink("Gérer les réponses", "Details", "Composants", new { id = com.id }, null)
                     }
                 </td>
                 <td>
@@ -98,48 +98,76 @@
                     }
                 </td>
             </tr>
-            foreach(var rep in com.Question.Reponse)
+            foreach (var rep in com.Question.Reponse)
             {
 
-            <tr>
-                <td>
-                    &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
-                    @rep.contenu
+                <tr>
+                    <td>
+                        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+                        @rep.contenu
 
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
             }
         }
     </tbody>
 </table>
-@if(Model.dateCloturation != null && Model.dateCloturation < DateTime.Now)
+@if (Model.dateCloturation != null && Model.dateCloturation < DateTime.Now)
 {
-<br />
-<h4>Sondages</h4>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Date</th>
-            @if (Model.dateValidation == null)
-            {
-                <th colspan="3">Actions</th>
-            }
-            </tr>
-    </thead>
-    <tbody>
-        @foreach (var sond in @Model.Sondage)
-        {
+    <br />
+    <h4>Sondages</h4>
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <td>@sond.date</td>
-
-                <td>
-                    @Html.ActionLink("Détails", "Details", "Sondages", new { id = sond.id }, null)
-                </td>
+                <th>Date</th>
+                @if (Model.dateValidation == null)
+                {
+                    <th colspan="3">Actions</th>
+                }
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var sond in @Model.Sondage)
+            {
+                <tr>
+                    <td>@sond.date</td>
+
+                    <td>
+                        @Html.ActionLink("Détails", "Details", "Sondages", new { id = sond.id }, null)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
+<div id="piechart"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+  ['Task', 'Hours per Day'],
+  ['Work', 8],
+  ['Eat', 2],
+  ['TV', 4],
+  ['Gym', 2],
+  ['Sleep', 8]
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'My Average Day', 'width':550, 'height':400};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
+</script>
