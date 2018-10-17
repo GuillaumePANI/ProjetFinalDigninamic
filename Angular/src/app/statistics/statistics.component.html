@@ -1,0 +1,26 @@
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<table class="table">
+    <thead>
+      <tr>
+        
+        <th>TitreFormulaire</th>
+        <th>Date de clôture</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of stats">
+        <td>{{ s.Titre }}</td>
+        <td>{{ s.DateCloturation }}</td>
+        <td><a routerLink="/Statistics/{{s.Id}}">voir statistiques</a></td>
+        
+      </tr>
+    </tbody>
+</table>
+
+

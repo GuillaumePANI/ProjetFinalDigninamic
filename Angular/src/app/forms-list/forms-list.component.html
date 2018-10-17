@@ -1,0 +1,44 @@
+<br/>
+<br/>
+<br/>
+<br/>
+<form (ngSubmit)="onSubmit()">
+  <ngb-accordion [closeOthers]="true" activeIds="static-1">
+    
+      <ngb-panel id="static-1">
+          <ng-template ngbPanelTitle>
+            <span>&#9733; <b>General   informations</b> &#9733;</span>
+          </ng-template>
+          <ng-template ngbPanelContent>
+          
+                 
+                          <div class="form-group">
+                           
+                             <input type="number" class="form-control" id="age" name="age" placeholder="Age" [(ngModel)]="age">
+                          </div>
+                     
+                          <div class="form-group">
+                            
+                            <input type="radio"  id="sex" name="sex" placeholder="sex" >Homme  
+                            <input type="radio"  id="sex"  name="sex" placeholder="sex" > Femme
+  
+                          </div>
+                          <div class="form-group">
+                                 
+                                  <input type="text" class="form-control" id="localisation" name="localisation" placeholder="localisation">
+                          </div>
+                     
+           
+          </ng-template>
+        </ngb-panel>
+      <ngb-panel id="static-2">
+        <ng-template ngbPanelTitle>
+            <span>&#9733; <b>Start the questionnaire </b>  &#9733;</span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+            <app-forms></app-forms>
+        </ng-template>
+      </ngb-panel>
+   
+    </ngb-accordion>
+   </form>

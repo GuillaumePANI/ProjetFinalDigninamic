@@ -1,0 +1,53 @@
+<br />
+<br />
+<br />
+
+<select [ngModel]="selected" class="form-control" (change)="sondageChange($event.target.value)">
+
+  <option *ngFor="let u of sondages  " [value]="u.id">
+    <label for="quest"> Formulaire n° {{u.id}} : </label> {{u.titre}} {{u.contenu}}
+    
+  </option>
+
+</select>
+<br />
+<section *ngIf="selected">
+<form (ngSubmit)="onSubmit($event)">
+
+    <ul>
+    <li  *ngFor="let question of composants;let i = index" value="question" >
+      <h4>Q n° {{i+1}} :  {{question.Question.contenu}}</h4>
+       <br/>
+       <form>
+      <section *ngIf=" question.TypeReponse.id == 1;">
+        <p *ngFor="let rep of question.Question.Reponse">
+          <input  type="radio" name="reponse" [ngModel]="selectedRep" (change)="reponsChange($event.target.value)" value="{{rep.contenu}}">{{rep.contenu}}
+        </p>
+      </section>
+    </form>
+    <form >
+      <section *ngIf=" question.TypeReponse.id == 2;">
+        <p *ngFor="let repp of  question.Question.Reponse">
+          <input type="checkbox" name="repons" [ngModel]="selectedRep" value="{{repp.contenu}}">{{repp.contenu}}
+        </p>
+      </section>
+    </form>
+    <form>
+      <section *ngIf=" question.TypeReponse.id == 3;">
+          <textarea [ngModel]="selectedRep" name="repon" rows="10" cols="30"></textarea>
+      </section>
+    </form>
+    </li>
+    </ul>
+
+<br />
+
+  <button type="submit" class="btn btn-outline-secondary" ngbPopover="Réponse envoyée avec succès!"
+  popoverClass="my-custom-class">
+  Submit
+</button>
+ 
+</form>
+</section>
+
+
