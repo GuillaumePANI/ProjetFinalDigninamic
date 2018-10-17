@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebApi.Models;
@@ -154,6 +156,10 @@ namespace WebApi.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //var currentUser = UserManager.FindByName(user.UserName);
+
+                    //var roleresult = UserManager.AddToRole(currentUser.Id, "Admin");
+
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // Pour plus d'informations sur l'activation de la confirmation de compte et de la réinitialisation de mot de passe, visitez https://go.microsoft.com/fwlink/?LinkID=320771

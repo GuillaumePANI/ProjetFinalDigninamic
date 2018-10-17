@@ -11,7 +11,7 @@ using WebApi.Repository;
 
 namespace WebApi.Controllers.BackOfficeControllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class SondagesController : Controller
     {
         private SondageRepository repo = new SondageRepository();

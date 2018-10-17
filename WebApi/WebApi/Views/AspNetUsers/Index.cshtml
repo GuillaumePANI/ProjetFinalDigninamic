@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebApi.Models.Bdd.AspNetUsers>
+
+<table class="table">
+    <tr>
+        <th>
+            Identifiant utilisateur
+        </th>
+        <th>
+            Nombre d'accès refusé
+        </th>
+        <th colspan="2">
+            Rôle
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccessFailedCount)
+        </td>
+        <td>
+            @if (item.AspNetRoles.Count() > 0)
+            {
+                @Html.DisplayFor(modelItem => item.AspNetRoles.First().Name)
+            } else
+            {
+                @Html.Label("En attente")
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Changer le rôle", "ChangeRole", new { id = item.Id })
+        </td>
+    </tr>
+    }
+
+</table>

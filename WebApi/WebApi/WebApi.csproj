@@ -239,6 +239,7 @@
     <Compile Include="Controllers\ApiControllers\FormulaireApiController.cs" />
     <Compile Include="Controllers\ApiControllers\SondageApiController.cs" />
     <Compile Include="Controllers\ApiControllers\StatistiqueApiController.cs" />
+    <Compile Include="Controllers\BackOfficeControllers\AspNetUsersController.cs" />
     <Compile Include="Controllers\BackOfficeControllers\ComposantsController.cs" />
     <Compile Include="Controllers\BackOfficeControllers\FormulairesController.cs" />
     <Compile Include="Controllers\BackOfficeControllers\QuestionsController.cs" />
@@ -246,7 +247,7 @@
     <Compile Include="Controllers\BackOfficeControllers\SatisistiquesController.cs" />
     <Compile Include="Controllers\BackOfficeControllers\SondagesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -317,9 +318,12 @@
     <Compile Include="Models\Bdd_Partial\ThemeQuestion.override.cs" />
     <Compile Include="Models\Bdd_Partial\TypeReponse.override.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Statistique.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Repository\AspNetRolesRepository.cs" />
+    <Compile Include="Repository\AspNetUsersRepository.cs" />
     <Compile Include="Repository\ComposantRepository.cs" />
     <Compile Include="Repository\StatistiqueRepository.cs" />
     <Compile Include="Repository\FormulaireRepository.cs" />
@@ -472,6 +476,8 @@
     <Content Include="Views\Questions\Index.cshtml" />
     <Content Include="Views\Statistiques\Index.cshtml" />
     <Content Include="Views\Statistiques\Details.cshtml" />
+    <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\AspNetUsers\ChangeRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

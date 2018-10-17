@@ -10,7 +10,7 @@ using WebApi.Repository;
 
 namespace WebApi.Controllers.BackOfficeControllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class StatistiquesController : Controller
     {
         private readonly FormulaireRepository formRepo = new FormulaireRepository();
